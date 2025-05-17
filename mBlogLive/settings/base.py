@@ -22,6 +22,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 
 # Application definition
+ALLOWED_HOSTS = ["127.0.0.1:8000", "*"]
 
 INSTALLED_APPS = [
     "home",
