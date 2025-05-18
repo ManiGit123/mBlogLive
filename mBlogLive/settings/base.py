@@ -89,19 +89,19 @@ WSGI_APPLICATION = "mBlogLive.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-#     }
-# }
 DATABASES = {
-    "default": dj_database_url.config(
-        default="postgresql://mblog_user:hKyPIVZcURCP54fsIy2XvRkbomaLuRNl@dpg-d0kq4k56ubrc73bgirhg-a/mblog",
-        conn_max_age=600,
-        ssl_require=True,  # important for Render
-    )
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+    }
 }
+# DATABASES = {
+#     "default": dj_database_url.config(
+#         default="postgresql://mblog_user:hKyPIVZcURCP54fsIy2XvRkbomaLuRNl@dpg-d0kq4k56ubrc73bgirhg-a/mblog",
+#         conn_max_age=600,
+#         ssl_require=True,  # important for Render
+#     )
+# }
 # postgresql://mblog_user:hKyPIVZcURCP54fsIy2XvRkbomaLuRNl@dpg-d0kq4k56ubrc73bgirhg-a.oregon-postgres.render.com/mblog
 
 # Password validation
