@@ -1,16 +1,1 @@
-services:
-  - type: web
-    name: your-wagtail-app
-    env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn yourproject.wsgi
-    postDeployCommand: |
-      python manage.py migrate &&
-      python manage.py createsuperuser --noinput
-    envVars:
-      - key: DJANGO_SUPERUSER_USERNAME
-        value: mani
-      - key: DJANGO_SUPERUSER_PASSWORD
-        value: Test@123
-      - key: DJANGO_SUPERUSER_EMAIL
-        value: manikandanp045@gmail.com
+
