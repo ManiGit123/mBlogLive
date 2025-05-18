@@ -11,9 +11,10 @@ services:
     postDeployCommand: |
       python manage.py migrate &&
       python manage.py createsuperuser --noinput
+    envVars:
       - key: DJANGO_SUPERUSER_USERNAME
-        value: admin
+        value: mani
       - key: DJANGO_SUPERUSER_PASSWORD
-        value: yourpassword
+        value: Test@123
       - key: DJANGO_SUPERUSER_EMAIL
-        value: your@email.com
+        value: manikandanp045@gmail.com
