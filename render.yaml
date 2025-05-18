@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: your-wagtail-app
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn yourproject.wsgi
+    envVars:
+      - key: DATABASE_URL
+        value: your-database-url
+    # 👇 Add a postDeploy command
+    postDeployCommand: |
+      python manage.py migrate &&
+      python manage.py createsuperuser --noinput
+      - key: DJANGO_SUPERUSER_USERNAME
+        value: admin
+      - key: DJANGO_SUPERUSER_PASSWORD
+        value: yourpassword
+      - key: DJANGO_SUPERUSER_EMAIL
+        value: your@email.com
