@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "cloudinary_storage",
+    "cloudinary",
 ]
 
 MIDDLEWARE = [
@@ -62,6 +64,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
+
 
 ROOT_URLCONF = "mBlogLive.urls"
 
@@ -151,14 +154,26 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
+
+# DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage" #Deprecated
+
+# Cloudinary settings
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": "ds0c6ykp9",
+    "API_KEY": "863286785249729",
+    "API_SECRET": "NjZInP4TJxJqlPC_JMLpek-hw2M",
+}
 
 # Default storage settings, with the staticfiles storage updated.
 # See https://docs.djangoproject.com/en/5.2/ref/settings/#std-setting-STORAGES
 STORAGES = {
+    # "default": {
+    #     "BACKEND": "django.core.files.storage.FileSystemStorage",
+    # },
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     # ManifestStaticFilesStorage is recommended in production, to prevent
     # outdated JavaScript / CSS assets being served from cache

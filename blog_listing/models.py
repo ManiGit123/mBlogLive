@@ -4,6 +4,7 @@ from wagtail.fields import RichTextField, StreamField
 from home import blocks
 from home.models import FinancialBLog
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
+from django.db import models
 
 # Create your models here.
 
@@ -27,3 +28,7 @@ class FinancialBlogListingPage(Page):
         contaxt = super().get_context(request, *args, **kwargs)
         contaxt["posts"] = FinancialBLog.objects.live().public()
         return contaxt
+
+
+class MyImage(models.Model):
+    image = models.ImageField()
