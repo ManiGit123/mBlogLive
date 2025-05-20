@@ -4,6 +4,7 @@ from wagtail.models import Page, Orderable
 from wagtail.fields import RichTextField, StreamField
 from . import blocks
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
+from wagtailcodeblock.blocks import CodeBlock
 
 # from modelcluster.fields import ParentalKey
 
@@ -31,6 +32,8 @@ class FinancialBLog(Page):
             ("simple_rich_text", blocks.SimpleRichTextBlock()),  # way 2
             ("card", blocks.CardBlock()),
             ("cta", blocks.CTABlock()),
+            # ("code", blocks.CodeBlock()),
+            ("codeblock", CodeBlock(label="Code block", classname="container")),
         ],
         blank=True,
         null=True,

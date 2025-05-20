@@ -1,0 +1,303 @@
+from io import BytesIO
+from PIL import Image
+from django.core.files.base import ContentFile
+from django.db import models
+
+class MyModel(models.Model):
+    image = models.ImageField(upload_to='images/')
+
+    def save(self, *args, **kwargs):
+        if self.image:
+            img = Image.open(self.image)
+            img_io = BytesIO()
+            img.save(img_io, format='JPEG', quality=70)
+            self.image.file = ContentFile(img_io.getvalue(), name=self.image.name)
+        super().save(*args, **kwargs)
+
+
+
+
+
+
+
+
+
+
+
+
+To use Cloudinary with Python to compress images, you'll need to install the Cloudinary Python SDK and then use its upload function with the quality parameter. Cloudinary can also automatically optimize images by using the q_auto parameter in the image URL. 
+Here's a breakdown of how to do it:
+Install the Cloudinary Python SDK:
+Code
+
+   pip install cloudinary
+Import the library:
+Python
+
+   import cloudinary
+Configure your Cloudinary account:
+You'll need to set your Cloud Name, API Key, and API Secret in your Python script or environment variables. 
+Python
+
+   cloudinary.config(
+       cloud_name = "your_cloud_name",
+       api_key = "your_api_key",
+       api_secret = "your_api_secret"
+   )
+Upload and compress an image using the quality parameter:
+You can specify the quality level when uploading an image. A lower quality value means more compression and a smaller file size, but you might see a loss in visual quality. Here's an example: 
+Python
+
+   result = cloudinary.uploader.upload("cat.jpg", {"quality": "60"})
+This will upload the image cat.jpg and set the quality to 60, resulting in a compressed image. 
+Automatic quality optimization:
+To let Cloudinary automatically select the best compression level based on the image, the user's device, and network, you can use the q_auto parameter in your image URL when delivering the image. For example: 
+Python
+
+   # Use cloudinary.url() to create an image URL with q_auto
+   image_url = cloudinary.url("cat.jpg", {"q_auto": True})
+Then, you can use this URL in your web application or wherever you need to display the image. 
+Example using automatic quality optimization:
+Python
+
+import cloudinary
+
+# Configure Cloudinary
+cloudinary.config(
+    cloud_name = "your_cloud_name",
+    api_key = "your_api_key",
+    api_secret = "your_api_secret"
+)
+
+# Upload the image
+result = cloudinary.uploader.upload("cat.jpg", {"quality": "60"})
+
+# Get the image URL with automatic quality optimization
+image_url = cloudinary.url(result["public_id"], {"q_auto": True})
+
+print(image_url)
+Key points:
+The quality parameter controls the compression level (0-100). 
+q_auto automatically optimizes the image quality based on the image content, format, and viewing device. 
+Use the Cloudinary Python SDK to upload and manage your images. 
+You can also use other Cloudinary features like resizing, cropping, and image effects. 
+
+
+
+
+
+        WAGTAILIMAGE_STORAGE_CLOUD
+
+
+
+
+
+
+
+
+
+WAGTAIL_CODE_BLOCK_LANGUAGES = (
+    ('abap', 'ABAP'),
+    ('abnf', 'Augmented Backus–Naur form'),
+    ('actionscript', 'ActionScript'),
+    ('ada', 'Ada'),
+    ('antlr4', 'ANTLR4'),
+    ('apacheconf', 'Apache Configuration'),
+    ('apl', 'APL'),
+    ('applescript', 'AppleScript'),
+    ('aql', 'AQL'),
+    ('arduino', 'Arduino'),
+    ('arff', 'ARFF'),
+    ('asciidoc', 'AsciiDoc'),
+    ('asm6502', '6502 Assembly'),
+    ('aspnet', 'ASP.NET (C#)'),
+    ('autohotkey', 'AutoHotkey'),
+    ('autoit', 'AutoIt'),
+    ('bash', 'Bash + Shell'),
+    ('basic', 'BASIC'),
+    ('batch', 'Batch'),
+    ('bison', 'Bison'),
+    ('bnf', 'Backus–Naur form + Routing Backus–Naur form'),
+    ('brainfuck', 'Brainfuck'),
+    ('bro', 'Bro'),
+    ('c', 'C'),
+    ('clike', 'C-like'),
+    ('cmake', 'CMake'),
+    ('csharp', 'C#'),
+    ('cpp', 'C++'),
+    ('cil', 'CIL'),
+    ('coffeescript', 'CoffeeScript'),
+    ('clojure', 'Clojure'),
+    ('crystal', 'Crystal'),
+    ('csp', 'Content-Security-Policy'),
+    ('css', 'CSS'),
+    ('css-extras', 'CSS Extras'),
+    ('d', 'D'),
+    ('dart', 'Dart'),
+    ('diff', 'Diff'),
+    ('django', 'Django/Jinja2'),
+    ('dns-zone-file', 'DNS Zone File'),
+    ('docker', 'Docker'),
+    ('ebnf', 'Extended Backus–Naur form'),
+    ('eiffel', 'Eiffel'),
+    ('ejs', 'EJS'),
+    ('elixir', 'Elixir'),
+    ('elm', 'Elm'),
+    ('erb', 'ERB'),
+    ('erlang', 'Erlang'),
+    ('etlua', 'Embedded LUA Templating'),
+    ('fsharp', 'F#'),
+    ('flow', 'Flow'),
+    ('fortran', 'Fortran'),
+    ('ftl', 'Freemarker Template Language'),
+    ('gcode', 'G-code'),
+    ('gdscript', 'GDScript'),
+    ('gedcom', 'GEDCOM'),
+    ('gherkin', 'Gherkin'),
+    ('git', 'Git'),
+    ('glsl', 'GLSL'),
+    ('gml', 'GameMaker Language'),
+    ('go', 'Go'),
+    ('graphql', 'GraphQL'),
+    ('groovy', 'Groovy'),
+    ('haml', 'Haml'),
+    ('handlebars', 'Handlebars'),
+    ('haskell', 'Haskell'),
+    ('haxe', 'Haxe'),
+    ('hcl', 'HCL'),
+    ('http', 'HTTP'),
+    ('hpkp', 'HTTP Public-Key-Pins'),
+    ('hsts', 'HTTP Strict-Transport-Security'),
+    ('ichigojam', 'IchigoJam'),
+    ('icon', 'Icon'),
+    ('inform7', 'Inform 7'),
+    ('ini', 'Ini'),
+    ('io', 'Io'),
+    ('j', 'J'),
+    ('java', 'Java'),
+    ('javadoc', 'JavaDoc'),
+    ('javadoclike', 'JavaDoc-like'),
+    ('javascript', 'JavaScript'),
+    ('javastacktrace', 'Java stack trace'),
+    ('jolie', 'Jolie'),
+    ('jq', 'JQ'),
+    ('jsdoc', 'JSDoc'),
+    ('js-extras', 'JS Extras'),
+    ('js-templates', 'JS Templates'),
+    ('json', 'JSON'),
+    ('jsonp', 'JSONP'),
+    ('json5', 'JSON5'),
+    ('julia', 'Julia'),
+    ('keyman', 'Keyman'),
+    ('kotlin', 'Kotlin'),
+    ('latex', 'LaTeX'),
+    ('less', 'Less'),
+    ('lilypond', 'Lilypond'),
+    ('liquid', 'Liquid'),
+    ('lisp', 'Lisp'),
+    ('livescript', 'LiveScript'),
+    ('lolcode', 'LOLCODE'),
+    ('lua', 'Lua'),
+    ('makefile', 'Makefile'),
+    ('markdown', 'Markdown'),
+    ('markup', 'Markup + HTML + XML + SVG + MathML'),
+    ('markup-templating', 'Markup templating'),
+    ('matlab', 'MATLAB'),
+    ('mel', 'MEL'),
+    ('mizar', 'Mizar'),
+    ('monkey', 'Monkey'),
+    ('n1ql', 'N1QL'),
+    ('n4js', 'N4JS'),
+    ('nand2tetris-hdl', 'Nand To Tetris HDL'),
+    ('nasm', 'NASM'),
+    ('nginx', 'nginx'),
+    ('nim', 'Nim'),
+    ('nix', 'Nix'),
+    ('nsis', 'NSIS'),
+    ('objectivec', 'Objective-C'),
+    ('ocaml', 'OCaml'),
+    ('opencl', 'OpenCL'),
+    ('oz', 'Oz'),
+    ('parigp', 'PARI/GP'),
+    ('parser', 'Parser'),
+    ('pascal', 'Pascal + Object Pascal'),
+    ('pascaligo', 'Pascaligo'),
+    ('pcaxis', 'PC Axis'),
+    ('perl', 'Perl'),
+    ('php', 'PHP'),
+    ('phpdoc', 'PHPDoc'),
+    ('php-extras', 'PHP Extras'),
+    ('plsql', 'PL/SQL'),
+    ('powershell', 'PowerShell'),
+    ('processing', 'Processing'),
+    ('prolog', 'Prolog'),
+    ('properties', '.properties'),
+    ('protobuf', 'Protocol Buffers'),
+    ('pug', 'Pug'),
+    ('puppet', 'Puppet'),
+    ('pure', 'Pure'),
+    ('python', 'Python'),
+    ('q', 'Q (kdb+ database)'),
+    ('qore', 'Qore'),
+    ('r', 'R'),
+    ('jsx', 'React JSX'),
+    ('tsx', 'React TSX'),
+    ('renpy', 'Ren\'py'),
+    ('reason', 'Reason'),
+    ('regex', 'Regex'),
+    ('rest', 'reST (reStructuredText)'),
+    ('rip', 'Rip'),
+    ('roboconf', 'Roboconf'),
+    ('robot-framework', 'Robot Framework'),
+    ('ruby', 'Ruby'),
+    ('rust', 'Rust'),
+    ('sas', 'SAS'),
+    ('sass', 'Sass (Sass)'),
+    ('scss', 'Sass (Scss)'),
+    ('scala', 'Scala'),
+    ('scheme', 'Scheme'),
+    ('shell-session', 'Shell Session'),
+    ('smalltalk', 'Smalltalk'),
+    ('smarty', 'Smarty'),
+    ('solidity', 'Solidity (Ethereum)'),
+    ('sparql', 'SPARQL'),
+    ('splunk-spl', 'Splunk SPL'),
+    ('sqf', 'SQF: Status Quo Function (Arma 3)'),
+    ('sql', 'SQL'),
+    ('soy', 'Soy (Closure Template)'),
+    ('stylus', 'Stylus'),
+    ('swift', 'Swift'),
+    ('tap', 'TAP'),
+    ('tcl', 'Tcl'),
+    ('textile', 'Textile'),
+    ('toml', 'TOML'),
+    ('tt2', 'Template Toolkit 2'),
+    ('twig', 'Twig'),
+    ('typescript', 'TypeScript'),
+    ('t4-cs', 'T4 Text Templates (C#)'),
+    ('t4-vb', 'T4 Text Templates (VB)'),
+    ('t4-templating', 'T4 templating'),
+    ('vala', 'Vala'),
+    ('vbnet', 'VB.Net'),
+    ('velocity', 'Velocity'),
+    ('verilog', 'Verilog'),
+    ('vhdl', 'VHDL'),
+    ('vim', 'vim'),
+    ('visual-basic', 'Visual Basic'),
+    ('wasm', 'WebAssembly'),
+    ('wiki', 'Wiki markup'),
+    ('xeora', 'Xeora + XeoraCube'),
+    ('xojo', 'Xojo (REALbasic)'),
+    ('xquery', 'XQuery'),
+    ('yaml', 'YAML'),
+    ('zig', 'Zig'),
+)
+
+None: Default
+'coy': Coy
+'dark': Dark
+'funky': Funky
+'okaidia': Okaidia
+'solarizedlight': Solarized Light
+'twilight': Twilight
+For example, in you want to use the Solarized Light theme: WAGTAIL_CODE_BLOCK_THEME = 'solarizedlight' If you want to use the Default theme: WAGTAIL_CODE_BLOCK_THEME = None

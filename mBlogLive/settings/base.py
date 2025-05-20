@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "wagtail.search",
     "wagtail.admin",
     "wagtail",
+    "wagtailcodeblock",
     "modelcluster",
     "taggit",
     "django_filters",
@@ -221,3 +222,19 @@ WAGTAILDOCS_EXTENSIONS = [
     "xlsx",
     "zip",
 ]
+
+# WagtailCodeBlock Setup
+WAGTAIL_CODE_BLOCK_LINE_NUMBERS = False
+WAGTAIL_CODE_BLOCK_COPY_TO_CLIPBOARD = True
+WAGTAIL_CODE_BLOCK_THEME = "okaidia"
+WAGTAIL_CODE_BLOCK_LANGUAGES = (
+    ("bash", "Bash/Shell"),
+    ("css", "CSS"),
+    ("diff", "diff"),
+    ("html", "HTML"),
+    ("javascript", "Javascript"),
+    ("json", "JSON"),
+    ("python", "Python"),
+    ("scss", "SCSS"),
+    ("yaml", "YAML"),
+)

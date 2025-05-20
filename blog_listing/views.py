@@ -8,13 +8,19 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
-@login_required
+@staff_member_required
 def download_sqlite_db(request):
     db_path = os.path.join(settings.BASE_DIR, "db.sqlite3")
 
     if os.path.exists(db_path):
-        return FileResponse(
-            open(db_path, "rb"), as_attachment=True, filename="db.sqlite3"
-        )
+        if (
+            request.user.username == "mani"
+            and request.user.email == "manikandanp045@gmail.com"
+        ):
+            return FileResponse(
+                open(db_path, "rb"), as_attachment=True, filename="db.sqlite3"
+            )
+        else:
+            return HttpResponse("you are not allowed to access this path.", status=404)
     else:
         return HttpResponse("Database file not found.", status=404)

@@ -93,3 +93,27 @@ class SimpleRichTextBlock(blocks.RichTextBlock):
         template = "blocks/rich_text_block.html"
         icon = "edit"
         label = "Simple Rich Text"
+
+
+# class CodeBlock(blocks.RichTextBlock):
+#     # Rich text without (limited) all the features
+
+#     # way 2
+#     def __init__(
+#         self,
+#         required=True,
+#         help_text=None,
+#         editor="default",
+#         features=None,
+#         max_length=None,
+#         validators=(),
+#         search_index=True,
+#         **kwargs,
+#     ):
+#         super().__init__(**kwargs)
+#         self.features = ["code"]
+
+#     class Meta:
+#         template = "blocks/rich_text_block.html"
+#         icon = "edit"
+#         label = "Code"
