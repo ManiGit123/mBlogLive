@@ -33,7 +33,9 @@ INSTALLED_APPS = [
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
-    "wagtail.sites",
+    "wagtailseo",  # Wagtail - seo
+    "wagtail.contrib.settings",  # Wagtail - seo
+    "wagtail.sites",  # Wagtail - seo - and - default
     "wagtail.users",
     "wagtail.snippets",
     "wagtail.documents",
@@ -63,8 +65,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    "wagtail.contrib.redirects.middleware.RedirectMiddleware",   
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
 
 
@@ -83,6 +85,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "wagtail.contrib.settings.context_processors.settings",
             ],
         },
     },
@@ -223,7 +226,8 @@ WAGTAILDOCS_EXTENSIONS = [
     "xlsx",
     "zip",
 ]
-
+# WagtailEmbed
+WAGTAILEMBEDS_RESPONSIVE_HTML = True
 # WagtailCodeBlock Setup
 WAGTAIL_CODE_BLOCK_LINE_NUMBERS = False
 WAGTAIL_CODE_BLOCK_COPY_TO_CLIPBOARD = True

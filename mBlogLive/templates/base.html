@@ -4,6 +4,7 @@
 <html lang="en">
 
 <head>
+    {% include "wagtailseo/meta.html" %}
     <meta charset="utf-8" />
     <title>
         {% block title %}
@@ -14,6 +15,7 @@
         {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
         {% endblock %}
     </title>
+    <link rel="icon" type="image/png" href="{% static 'image/tag.png' %}">
     {% if page.search_description %}
     <meta name="description" content="{{ page.search_description }}" />
     {% endif %}
@@ -39,6 +41,8 @@
 <body class="{% block body_class %}{% endblock %}">
     {% wagtailuserbar %}
     {% include "common/nav.html" %}
+    {% include "wagtailseo/struct_data.html" %}
+    {% include "wagtailseo/struct_org_data.html" %}
     {% block content %}{% endblock %}
 
     {% include "common/footer.html" %}
