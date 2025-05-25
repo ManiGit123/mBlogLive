@@ -51,11 +51,11 @@ class TravelBlogListingPage(Page):
         return contaxt
 
 
-class TutorailsBlogListingPage(Page):
+class TutorialsBlogListingPage(Page):
     # getting all the blogdetailpages and putting them into then context of this template
     # listing page lists all blog details pages
 
-    template = "tutorial/tuto_blog_listing_page.html"
+    template = "tuto/tuto_blog_listing_page.html"
 
     custom_title = models.CharField(
         max_length=100, blank=False, null=False, help_text="Overwrite the default title"

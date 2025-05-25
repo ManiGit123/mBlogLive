@@ -4,6 +4,7 @@ import os
 from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -24,3 +25,13 @@ def download_sqlite_db(request):
             return HttpResponse("you are not allowed to access this path.", status=404)
     else:
         return HttpResponse("Database file not found.", status=404)
+
+
+def robots_txt(request):
+    content = [
+        "User-agent: *",
+        "Disallow: /admin/",
+        "Disallow: /search/",
+        "Sitemap: https://yourdomain.com/sitemap.xml",
+    ]
+    return HttpResponse("\n".join(content), content_type="text/plain")
