@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path("db/", views.download_sqlite_db, name="download_sqlite_db"),
-    # path("robots.txt", views.robots_txt),
+    path("robots.txt", views.robots_txt),
 ]

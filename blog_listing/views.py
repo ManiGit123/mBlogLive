@@ -32,6 +32,6 @@ def robots_txt(request):
         "User-agent: *",
         "Disallow: /admin/",
         "Disallow: /search/",
-        "Sitemap: https://yourdomain.com/sitemap.xml",
+        "Sitemap: https://mbloglive.onrender.com/sitemap.xml",
     ]
     return HttpResponse("\n".join(content), content_type="text/plain")
