@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@theme {
+    --color-twitter-blue: #1DA1F2;
+}

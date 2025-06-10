@@ -1,0 +1,29 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
+    "postbuild": "copyfiles -u 1 dist/bundle.js ../../mBlogLive/static/js/",
+    "dev": "npx @tailwindcss/cli -i ./src/input.css -o ../../mBlogLive/static/css/output.css --watch",
+    "build:css": "tailwindcss -i ./src/input.css -o ../../mBlogLive/static/css/output.css --minify"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@babel/core": "^7.27.4",
+    "@babel/preset-env": "^7.27.2",
+    "@tailwindcss/cli": "^4.1.8",
+    "babel-loader": "^10.0.0",
+    "copyfiles": "^2.4.1",
+    "css-loader": "^7.1.2",
+    "style-loader": "^4.0.0",
+    "tailwindcss": "^4.1.8",
+    "webpack": "^5.99.9",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
+  }
+}
