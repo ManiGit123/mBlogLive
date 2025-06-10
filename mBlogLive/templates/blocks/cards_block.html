@@ -1,22 +1,40 @@
 {% load wagtailimages_tags %}
 
-
-<h2 class="text-left pt-2">{{ self.title }}</h2>
-<div class="row row-cols-md-auto row-cols-lg-auto g-4">
+<h2 class="text-3xl font-bold text-center mb-10 text-slate-800 dark:text-slate-100">{{ self.title }}</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
     {% for card in self.cards %}
     {% image card.image fill-300x200 as img %}
-    <div class="col">
-        <div class="card" style="width: 18rem;">
-            <img src="{{img.url}}" class="card-img-top" alt="{{img.alt}}">
-            <div class="card-body">
-                <h3 class="card-title">{{ card.title }}</h3>
-                <p class="card-text">{{ card.text }}</p>
-                {% if card.button_page %}
-                <a href="{{card.button_page.url}}" class="btn btn-primary">Learn More(internal)</a>
-                {% elif card.button_url %}
-                <a href="{{card.button_url}}" class="btn btn-primary">Learn More(external)</a>
-                {% endif %}
+    <div class="relative flex flex-col bg-card-bg-light shadow-lg border border-slate-200 rounded-lg overflow-hidden
+                        dark:bg-card-bg-dark dark:border-slate-700">
+        <div class="relative h-48 sm:h-56 m-2.5 overflow-hidden rounded-md">
+            <img src="{{img.url}}" alt="{{img.alt}}" class="w-full h-full object-cover" />
+        </div>
+        <div class="p-4 flex flex-col flex-grow">
+            <h6 class="mb-2 text-slate-800 text-xl font-semibold dark:text-slate-200">
+                {{ card.title }}
+            </h6>
+            <div class="relative mb-4 flex-grow overflow-hidden max-h-24">
+                <p class="text-slate-600 leading-normal font-light dark:text-slate-400">
+                    {{ card.text }}
+                </p>
+                <div class="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-card-bg-light to-transparent
+                                    dark:from-card-bg-dark"></div>
             </div>
+            {% if card.button_page %}
+            <div class="pt-4 mt-auto">
+                <a href="{{card.button_page.url}}" target="_blank" rel="noopener noreferrer" class="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-full
+                                              dark:bg-primary-dark dark:hover:bg-primary-dark/80">
+                    Read more (internal)
+                </a>
+            </div>
+            {% elif card.button_url %}
+            <div class="pt-4 mt-auto">
+                <a href="{{card.button_url}}" target="_blank" rel="noopener noreferrer" class="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-full
+                                              dark:bg-primary-dark dark:hover:bg-primary-dark/80">
+                    Read more (external)
+                </a>
+            </div>
+            {% endif %}
         </div>
     </div>
     {% endfor %}

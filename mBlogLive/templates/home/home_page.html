@@ -1,9 +1,228 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags wagtailimages_tags static %}
 
+
 {% block content %}
-<div class="container">
-    <h1 class="display-4">{{self.banner_title}}</h1>
-    <div class="lead">{{self.banner_subtitle | richtext}}</div>
-</div>
+<main class="flex-grow pt-16 p-4 bg-white dark:bg-gray-900">
+    <div class="container">
+        <h1 class="display-4">
+            <span class="dark:text-gray-200">{{self.banner_title}}</span>
+        </h1>
+        <div class="lead">{{self.banner_subtitle | richtext}}</div>
+    </div>
+
+    <!-- Card grid components  -->
+    <div class="container mx-auto px-4 py-8">
+
+
+        <h1 class="text-3xl font-bold text-center mb-10 text-slate-800 dark:text-slate-100">Our Amazing Cards</h1>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="relative flex flex-col bg-card-bg-light shadow-lg border border-slate-200 rounded-lg overflow-hidden
+                            dark:bg-card-bg-dark dark:border-slate-700">
+                <div class="relative h-48 sm:h-56 m-2.5 overflow-hidden rounded-md">
+                    <img src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                        alt="Card Image 1" class="w-full h-full object-cover" />
+                </div>
+                <div class="p-4 flex flex-col flex-grow">
+                    <h6 class="mb-2 text-slate-800 text-xl font-semibold dark:text-slate-200">
+                        Website Review Check Website Review Check
+                        Website Review Check
+                        Website Review Check
+                        Website Review Check
+                        Website Review Check
+                        Website Review Check
+                        Website Review Check
+                        Website Review Check
+                        Website Review Check
+
+                    </h6>
+                    <div class="relative mb-4 flex-grow overflow-hidden max-h-24">
+                        <p class="text-slate-600 leading-normal font-light dark:text-slate-400">
+                            The place is close to Barceloneta Beach and bus stop just 2 min by walk
+                            and near to "Naviglio" where you can enjoy the main night life in
+                            Barcelona. This is a longer paragraph to demonstrate the overflow
+                            restriction. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+                            The place is close to Barceloneta Beach and bus stop just 2 min by walk
+                            and near to "Naviglio" where you can enjoy the main night life in
+                            Barcelona. This is a longer paragraph to demonstrate the overflow
+                            restriction. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+                            The place is close to Barceloneta Beach and bus stop just 2 min by walk
+                            and near to "Naviglio" where you can enjoy the main night life in
+                            Barcelona. This is a longer paragraph to demonstrate the overflow
+                            restriction. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+                            The place is close to Barceloneta Beach and bus stop just 2 min by walk
+                            and near to "Naviglio" where you can enjoy the main night life in
+                            Barcelona. This is a longer paragraph to demonstrate the overflow
+                            restriction. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+                        </p>
+                        <div class="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-card-bg-light to-transparent
+                                        dark:from-card-bg-dark"></div>
+                    </div>
+                    <div class="pt-4 mt-auto">
+                        <button class="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-full
+                                       dark:bg-primary-dark dark:hover:bg-primary-dark/80" type="button">
+                            Read more
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative flex flex-col bg-card-bg-light shadow-lg border border-slate-200 rounded-lg overflow-hidden
+                            dark:bg-card-bg-dark dark:border-slate-700">
+                <div class="relative h-48 sm:h-56 m-2.5 overflow-hidden rounded-md">
+                    <img src="https://images.unsplash.com/photo-1579783900882-c0d3ec7bd67d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
+                        alt="Card Image 2" class="w-full h-full object-cover" />
+                </div>
+                <div class="p-4 flex flex-col flex-grow">
+                    <h6 class="mb-2 text-slate-800 text-xl font-semibold dark:text-slate-200">
+                        Creative Portfolio Design
+                    </h6>
+                    <div class="relative mb-4 flex-grow overflow-hidden max-h-24">
+                        <p class="text-slate-600 leading-normal font-light dark:text-slate-400">
+                            Discover inspiring new designs and artistic expressions. This project showcases innovative
+                            approaches.
+                            This paragraph is shorter to show how the button still aligns.
+                        </p>
+                        <div class="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-card-bg-light to-transparent
+                                        dark:from-card-bg-dark"></div>
+                    </div>
+                    <div class="pt-4 mt-auto">
+                        <button class="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-full
+                                       dark:bg-primary-dark dark:hover:bg-primary-dark/80" type="button">
+                            View Project
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative flex flex-col bg-card-bg-light shadow-lg border border-slate-200 rounded-lg overflow-hidden
+                            dark:bg-card-bg-dark dark:border-slate-700">
+                <div class="relative h-48 sm:h-56 m-2.5 overflow-hidden rounded-md">
+                    <img src="https://images.unsplash.com/photo-1543874314-b49b380f7690?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
+                        alt="Card Image 3" class="w-full h-full object-cover" />
+                </div>
+                <div class="p-4 flex flex-col flex-grow">
+                    <h6 class="mb-2 text-slate-800 text-xl font-semibold dark:text-slate-200">
+                        Digital Marketing Strategies with a very very long title that wraps to two lines
+                    </h6>
+                    <div class="relative mb-4 flex-grow overflow-hidden max-h-24">
+                        <p class="text-slate-600 leading-normal font-light dark:text-slate-400">
+                            Learn about cutting-edge strategies to boost your online presence and reach a wider audience
+                            effectively.
+                            This is a short paragraph.
+                        </p>
+                        <div class="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-card-bg-light to-transparent
+                                        dark:from-card-bg-dark"></div>
+                    </div>
+                    <div class="pt-4 mt-auto">
+                        <button class="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-full
+                                       dark:bg-primary-dark dark:hover:bg-primary-dark/80" type="button">
+                            Discover More
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative flex flex-col bg-card-bg-light shadow-lg border border-slate-200 rounded-lg overflow-hidden
+                            dark:bg-card-bg-dark dark:border-slate-700">
+                <div class="relative h-48 sm:h-56 m-2.5 overflow-hidden rounded-md">
+                    <img src="https://images.unsplash.com/photo-1594951469584-c155552a4e9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
+                        alt="Card Image 4" class="w-full h-full object-cover" />
+                </div>
+                <div class="p-4 flex flex-col flex-grow">
+                    <h6 class="mb-2 text-slate-800 text-xl font-semibold dark:text-slate-200">
+                        E-commerce Solutions
+                    </h6>
+                    <div class="relative mb-4 flex-grow overflow-hidden max-h-24">
+                        <p class="text-slate-600 leading-normal font-light dark:text-slate-400">
+                            Powerful e-commerce platforms designed to help your business thrive online with ease.
+                            This is another very long paragraph to demonstrate how the text gets truncated.
+                            It's important to provide a good user experience even with limited space.
+                            Users can click "Read more" to see the full content.
+                        </p>
+                        <div class="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-card-bg-light to-transparent
+                                        dark:from-card-bg-dark"></div>
+                    </div>
+                    <div class="pt-4 mt-auto">
+                        <button class="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-full
+                                       dark:bg-primary-dark dark:hover:bg-primary-dark/80" type="button">
+                            Shop Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Pagination tailwind components -->
+    <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+        <div class="flex flex-1 justify-between sm:hidden">
+            <a href="#"
+                class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</a>
+            <a href="#"
+                class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</a>
+        </div>
+        <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+            <div>
+                <p class="text-sm text-gray-700">
+                    Showing
+                    <span class="font-medium">1</span>
+                    to
+                    <span class="font-medium">10</span>
+                    of
+                    <span class="font-medium">97</span>
+                    results
+                </p>
+            </div>
+            <div>
+                <nav class="isolate inline-flex -space-x-px rounded-md shadow-xs" aria-label="Pagination">
+                    <a href="#"
+                        class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                        <span class="sr-only">Previous</span>
+                        <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                            <path fill-rule="evenodd"
+                                d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    <!-- Current: "z-10 bg-indigo-600 text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" -->
+                    <a href="#" aria-current="page"
+                        class="relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">1</a>
+                    <a href="#"
+                        class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus:z-20 focus:outline-offset-0">2</a>
+                    <a href="#"
+                        class="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex">3</a>
+                    <span
+                        class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-gray-300 ring-inset focus:outline-offset-0">...</span>
+                    <a href="#"
+                        class="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex">8</a>
+                    <a href="#"
+                        class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus:z-20 focus:outline-offset-0">9</a>
+                    <a href="#"
+                        class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus:z-20 focus:outline-offset-0">10</a>
+                    <a href="#"
+                        class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                        <span class="sr-only">Next</span>
+                        <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                            <path fill-rule="evenodd"
+                                d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</main>
+
 {% endblock %}

@@ -1,41 +1,314 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
-    <div class="container">
-        <a class="navbar-brand" href="/home-page/">MBlog</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/home-page/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Tools</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Blog
+<nav class="bg-gray-100 dark:bg-gray-800 shadow-xl fixed w-full z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+            <div class="flex items-center">
+                <a href="/" class="flex-shrink-0">
+                    <span class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">mBlogLive</span>
+                </a>
+            </div>
+
+            <div class="hidden md:flex md:items-center md:space-x-4">
+                <div class="relative">
+                    <button
+                        class="text-gray-700 dark:text-gray-300 hover:bg-emerald-200 hover:text-indigo-600 dark:hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium focus:outline-none nav-dropdown-btn"
+                        data-dropdown="features-dropdown">
+                        Blogs
+                        <svg class="ml-1 inline-block w-4 h-4 transform transition-transform duration-200" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div id="features-dropdown"
+                        class="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5 focus:outline-none hidden dropdown-menu">
+                        <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                            <a href="/travel-blog/"
+                                class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
+                                role="menuitem">Travel blog</a>
+                            <a href="/finacial-blog/"
+                                class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
+                                role="menuitem">Financial blog</a>
+                            <a href="/tutorial-blog/"
+                                class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
+                                role="menuitem">Tutorial blog</a>
+
+                            <div class="border-t ml-4 border-gray-500 dark:border-gray-600 my-1"></div>
+
+                            <a href="/admin"
+                                class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
+                                role="menuitem">Admin</a>
+                            {% if user.is_authenticated %}
+                            <a href="/bd"
+                                class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
+                                role="menuitem">Download Db</a> {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <a href="#"
+                    class="text-gray-700 dark:text-gray-300 hover:bg-emerald-200 hover:text-indigo-600 dark:hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Pricing</a>
+                <a href="#"
+                    class="text-gray-700 dark:text-gray-300 hover:bg-emerald-200 hover:text-indigo-600 dark:hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">About</a>
+                <a href="#"
+                    class="text-gray-700 dark:text-gray-300 hover:bg-emerald-200 hover:text-indigo-600 dark:hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <div class="relative hidden md:block">
+                    <button
+                        class="max-w-xs bg-gray-200 dark:bg-gray-600 rounded-full flex items-center text-sm focus:outline-none nav-dropdown-btn"
+                        id="user-menu-button" aria-expanded="false" aria-haspopup="true"
+                        data-dropdown="desktop-account-dropdown">
+                        <span class="sr-only">Open user menu</span>
+                        <img class="h-8 w-8 rounded-full" src="https://via.placeholder.com/150" alt="User avatar">
+                    </button>
+                    <div id="desktop-account-dropdown"
+                        class="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5 focus:outline-none hidden dropdown-menu">
+                        <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button">
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
+                                role="menuitem">Your Profile</a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
+                                role="menuitem">Settings</a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
+                                role="menuitem">Sign out</a>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="darkModeToggle"
+                    class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none transition-colors duration-200">
+                    <svg class="h-6 w-6 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h1M4 12H3m15.325 5.925l-.707.707M6.707 6.707l-.707-.707m10.612 0l.707-.707M6.707 17.293l-.707.707M12 7a5 5 0 100 10 5 5 0 000-10z">
+                        </path>
+                    </svg>
+                    <svg class="h-6 w-6 moon-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                        </path>
+                    </svg>
+                </button>
+
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-300 hover:text-gray-500 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 mobile-menu-button"
+                        aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6 menu-icon-open" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg class="hidden h-6 w-6 menu-icon-close" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="md:hidden mobile-menu" id="mobile-menu">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <div class="relative">
+                <button
+                    class="text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-indigo-600 dark:hover:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium w-full text-left mobile-dropdown-btn"
+                    data-dropdown="mobile-features-dropdown">
+                    Blogs
+                    <svg class="ml-1 inline-block w-4 h-4 transform transition-transform duration-200" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div id="mobile-features-dropdown" class="hidden ml-4 mt-1 dropdown-menu">
+                    <a href="/travel-blog/"
+                        class="block px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-md">
+                        Travel blog
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/travel-blog/">Travel Blog</a></li>
-                        <li><a class="dropdown-item" href="/finacial-blog/">Financial Blog</a></li>
-                        <li><a class="dropdown-item" href="/tutorial-blog/">Tutorial Blog</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="/admin/">Other</a></li>
-                    </ul>
-                </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                </li> -->
-            </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+                    <a href="/finacial-blog/"
+                        class="block px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-md">
+                        Financial blog</a>
+                    <a href="/tutorial-blog/"
+                        class="block px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-md">
+                        Tutorial blog</a>
+
+                    <div class="border-t ml-3 border-gray-500 dark:border-gray-600 my-1"></div>
+
+                    <a href="/admin"
+                        class="block px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-md"
+                        role="menuitem">Admin</a>
+                    {% if user.is_authenticated %}
+                    <a href="/bd"
+                        class="block px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-md"
+                        role="menuitem">Download Db</a>
+                    {% endif %}
+                </div>
+            </div>
+            <a href="#"
+                class="text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-indigo-600 dark:hover:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">Pricing</a>
+            <a href="#"
+                class="text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-indigo-600 dark:hover:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">About</a>
+            <a href="#"
+                class="text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-indigo-600 dark:hover:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+
+            <div class="relative pt-4 pb-3 border-t border-gray-200 dark:border-gray-700 mt-1">
+                <button
+                    class="flex items-center px-3 py-2 rounded-md text-base font-medium w-full text-left mobile-dropdown-btn focus:outline-none"
+                    data-dropdown="mobile-account-dropdown">
+                    <img class="h-10 w-10 rounded-full mr-3" src="https://via.placeholder.com/150" alt="User avatar">
+                    <span class="text-gray-800 dark:text-white">Mani kandan</span>
+                    <svg class="inline-block ml-1 w-4 h-4 transform transition-transform duration-200" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div id="mobile-account-dropdown" class="hidden ml-4 mt-1 dropdown-menu">
+                    <a href="#"
+                        class="block px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-md">Your
+                        Profile</a>
+                    <a href="#"
+                        class="block px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-md">Settings</a>
+                    <a href="#"
+                        class="block px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-md">Sign
+                        out</a>
+                </div>
+            </div>
         </div>
     </div>
 </nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Mobile Menu Toggle ---
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const mobileMenu = document.querySelector('#mobile-menu');
+        const menuIconOpen = mobileMenuButton.querySelector('.menu-icon-open'); // Hamburger icon
+        const menuIconClose = mobileMenuButton.querySelector('.menu-icon-close'); // X icon
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                const isMenuOpen = mobileMenu.classList.contains('open');
+
+                if (isMenuOpen) {
+                    // Close menu
+                    mobileMenu.classList.remove('open');
+                    mobileMenu.setAttribute('aria-expanded', 'false');
+                    menuIconOpen.classList.remove('hidden');
+                    menuIconClose.classList.add('hidden');
+                } else {
+                    // Open menu
+                    mobileMenu.classList.add('open');
+                    mobileMenu.setAttribute('aria-expanded', 'true');
+                    menuIconOpen.classList.add('hidden');
+                    menuIconClose.classList.remove('hidden');
+                }
+            });
+        }
+
+        // --- Dropdown Functionality (Desktop and Mobile) ---
+        // Use event delegation for all dropdown buttons
+        document.body.addEventListener('click', (event) => {
+            const target = event.target;
+            const dropdownButton = target.closest('.nav-dropdown-btn') || target.closest('.mobile-dropdown-btn');
+
+            // Close all other open dropdowns first
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                if (menu.id !== (dropdownButton ? dropdownButton.dataset.dropdown : null) && !menu.classList.contains('hidden')) {
+                    menu.classList.add('hidden');
+                    // Also reset icon if it's a dropdown button with an SVG
+                    const parentButton = menu.previousElementSibling;
+                    if (parentButton && parentButton.tagName === 'BUTTON' && parentButton.querySelector('svg')) {
+                        parentButton.querySelector('svg').classList.remove('rotate-180');
+                    }
+                }
+            });
+
+            if (dropdownButton) {
+                const dropdownId = dropdownButton.dataset.dropdown;
+                const dropdownMenu = document.getElementById(dropdownId);
+                const dropdownIcon = dropdownButton.querySelector('svg');
+
+                if (dropdownMenu) {
+                    // Toggle the hidden class
+                    dropdownMenu.classList.toggle('hidden');
+                    // Toggle the icon rotation
+                    if (dropdownIcon) {
+                        dropdownIcon.classList.toggle('rotate-180');
+                    }
+                    // Prevent event from bubbling up to close-on-outside-click listener
+                    event.stopPropagation();
+                }
+            }
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (event) => {
+            // Check if the click was outside any dropdown button or menu
+            if (!event.target.closest('.dropdown-menu') && !event.target.closest('.nav-dropdown-btn') && !event.target.closest('.mobile-dropdown-btn')) {
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.classList.add('hidden');
+                    const parentButton = menu.previousElementSibling;
+                    if (parentButton && parentButton.tagName === 'BUTTON' && parentButton.querySelector('svg')) {
+                        parentButton.querySelector('svg').classList.remove('rotate-180');
+                    }
+                });
+            }
+        });
+
+
+        // --- Dark Mode Toggle ---
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const htmlElement = document.documentElement; // The <html> tag
+        const sunIcon = darkModeToggle.querySelector('.sun-icon');
+        const moonIcon = darkModeToggle.querySelector('.moon-icon');
+
+        // Function to update icon visibility
+        function updateDarkModeIcons(isDarkMode) {
+            if (isDarkMode) {
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            } else {
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            }
+        }
+
+        // Initialize theme based on localStorage or system preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            htmlElement.classList.remove('dark', 'light'); // Remove existing classes first
+            htmlElement.classList.add(savedTheme);
+            updateDarkModeIcons(savedTheme === 'dark');
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            // If no preference saved, check system preference
+            htmlElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark'); // Save system preference as default
+            updateDarkModeIcons(true);
+        } else {
+            htmlElement.classList.add('light'); // Default to light if no preference
+            localStorage.setItem('theme', 'light'); // Save light as default
+            updateDarkModeIcons(false);
+        }
+
+        // Add event listener for the toggle button
+        darkModeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+                updateDarkModeIcons(false);
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateDarkModeIcons(true);
+            }
+        });
+    });
+</script>

@@ -2,20 +2,22 @@
 {% load wagtailcore_tags wagtailembeds_tags %}
 
 {% block content %}
-<div class="container">
-    <h1>{{self.travel_title}}</h1>
-    {{self.travel_subtitle|richtext}}
-</div>
+<main class="flex-grow pt-16 p-4 bg-white dark:bg-gray-900">
+    <div class="container">
+        <h1>{{self.travel_title}}</h1>
+        {{self.travel_subtitle|richtext}}
+    </div>
 
-{% for block in page.content %}
-{% if block.block_type == 'embeded' %}
-<div class="container em">
-    {% include_block block %}
-</div>
-{% else %}
-<div class="container mt-4">
-    {% include_block block %}
-</div>
+    {% for block in page.content %}
+    {% if block.block_type == 'embeded' %}
+    <div class="container em">
+        {% include_block block %}
+    </div>
+    {% else %}
+    <div class="container mt-4">
+        {% include_block block %}
+    </div>
+</main>
 {% endif %}
 {% endfor %}
 
