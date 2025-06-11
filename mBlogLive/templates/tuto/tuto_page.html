@@ -3,18 +3,18 @@
 
 {% block content %}
 <main class="flex-grow pt-16 p-4 bg-white dark:bg-gray-900">
-    <div class="container">
+    <div class="container-cus">
         <h1>{{self.tuto_title}}</h1>
         {{self.tuto_subtitle|richtext}}
     </div>
 
     {% for block in page.content %}
     {% if block.block_type == 'embeded' %}
-    <div class="container em">
+    <div class="container-cus">
         {% include_block block %}
     </div>
     {% else %}
-    <div class="container mt-4">
+    <div class="container-cus">
         {% include_block block %}
     </div>
     {% endif %}

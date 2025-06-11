@@ -1,5 +1,11 @@
 {% if self.button_page %}
-<a href="{{self.button_page.url}}" class="btn btn-primary">{{ self.button_text }}(internal)</a>
+<a href="{{self.button_page.url}}"
+    class="inline-block px-4 py-2 font-semibold text-center text-white bg-blue-500 rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition duration-150 ease-in-out">
+    {{ self.button_text }}(internal)
+</a>
 {% elif self.button_url %}
-<a href="{{self.button_url}}" class="btn btn-primary">{{ self.button_text }}(external)</a>
+<a href="{{self.button_url}}"
+    class="inline-block px-4 py-2 font-semibold text-center text-white bg-blue-500 rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition duration-150 ease-in-out">
+    {{ self.button_text }}(external)
+</a>
 {% endif %}
