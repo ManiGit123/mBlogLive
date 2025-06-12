@@ -3,20 +3,37 @@
 {% block content %}
 <main class="flex-grow pt-16 p-4 bg-white dark:bg-gray-900">
     <div class="container-cus">
-        {% for post in posts %}
-        <div class="row">
-            <!-- <div class="col-sm-3">
-            {% image post.blog_image fill-250x250 as img %}
-            <a href="{{post.url}}"><img src="{{img.url}}" alt="{{img.alt}}"></a>
-        </div> -->
-            <div class="col-sm-9">
-                <a href="{{post.url}}" class="underline">{{post.travel_title}}</a>
-                {{post.travel_subtitle|richtext}}
-            </div>
-        </div>
+        <h1 class="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-white">Latest Adventures</h1>
 
-        <br />
-        {% endfor %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for post in posts %}
+            {% image post.travel_image fill-300x200 as img %}
+            <a href="{{post.url}}"
+                class="group block relative rounded-lg shadow-xl overflow-hidden transform hover:scale-102 transition-all duration-300">
+                <img src="{{img.url}}" alt="{{img.alt}}"
+                    class="w-full h-64 object-cover object-center group-hover:scale-105 transition-transform duration-500">
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300">
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                    <h2 class="text-2xl font-bold mb-2">{{post.travel_title}}</h2>
+                    <div class="text-sm line-clamp-2 mb-4">{{post.travel_subtitle|richtext}}</div>
+                    <div class="flex items-center justify-between text-xs text-gray-200">
+                        <span class="flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>{{post.travel_location}}</span>
+                        <span>{{post.travel_date}}</span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+
+        </div>
     </div>
 </main>
 {% endblock %}

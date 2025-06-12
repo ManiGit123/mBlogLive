@@ -3,20 +3,51 @@
 {% block content %}
 <main class="flex-grow pt-16 p-4 bg-white dark:bg-gray-900">
     <div class="container-cus">
-        {% for post in posts %}
-        <div class="row">
-            <!-- <div class="col-sm-3">
-            {% image post.blog_image fill-250x250 as img %}
-            <a href="{{post.url}}"><img src="{{img.url}}" alt="{{img.alt}}"></a>
-        </div> -->
-            <div class="col-sm-9">
-                <a href="{{post.url}}" class="underline">{{post.tuto_title}}</a>
-                {{post.tuto_subtitle|richtext}}
-            </div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-gray-800 dark:text-white mb-6">All Tutorials</h2>
+        <div class="grid grid-cols-1 gap-6">
+            {% for post in posts %}
+            {% image post.tuto_image fill-300x200 as img %}
+            <a href="{{post.url}}"
+                class="flex bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl hover:ring-2 hover:ring-blue-500 hover:ring-opacity-50 transition-all duration-300 overflow-hidden transform md:hover:-translate-y-1">
+                <img src="{{img.url}}" alt="{{img.alt}}" class="w-32 h-auto object-cover flex-shrink-0">
+                <div class="p-4 flex flex-col justify-between flex-grow">
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-2 line-clamp-2">
+                            {{post.tuto_title}}</h2>
+                        <div class="text-gray-600 dark:text-gray-300 text-sm line-clamp-3 mb-4">
+                            {{post.tuto_subtitle|richtext}}
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between text-gray-500 dark:text-gray-400 text-xs">
+                        <div class="flex items-center">
+                            {% if post.tuto_learner_type == "option1" %}
+                            <span class="mr-3 flex items-center text-green-600 dark:text-green-400"><i
+                                    class="fas fa-seedling mr-1"></i>Beginner</span>
+                            {% elif post.tuto_learner_type == "option2" %}
+                            <span class="mr-3 flex items-center text-yellow-600 dark:text-yellow-400"><i
+                                    class="fas fa-star mr-1"></i>Intermediate</span>
+                            {% elif post.tuto_learner_type == "option3" %}
+                            <span class="mr-3 flex items-center text-red-600 dark:text-red-400"><i
+                                    class="fas fa-fire mr-1"></i>Advanced</span>
+                            {% elif post.tuto_learner_type == "option4" %}
+                            <span class="mr-3 flex items-center text-purple-600 dark:text-purple-400"><i
+                                    class="fas fa-brain mr-1"></i>Expert</span>
+                            {%endif %}
+                            <span class="flex items-center mr-3"><i
+                                    class="fas fa-clock mr-1"></i>{{post.tuto_duration}}</span>
+                            <span class="flex items-center">{{post.tuto_date}}</span>
+                        </div>
+                        <span class="font-medium text-blue-500 dark:text-blue-400">Read More &rarr;</span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
         </div>
-
-        <br />
-        {% endfor %}
     </div>
 </main>
 {% endblock %}
+
+<!-- <div class="col-sm-3">
+                        {% image post.blog_image fill-250x250 as img %}
+                        <a href="{{post.url}}"><img src="{{img.url}}" alt="{{img.alt}}"></a>
+                    </div> -->

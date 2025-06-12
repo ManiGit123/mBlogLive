@@ -26,7 +26,27 @@ class HomePage(SeoMixin, Page):
 class FinancialBLog(SeoMixin, Page):
     template = "financial/financial_page.html"
     fin_title = models.CharField(max_length=300, blank=False, null=True)
-    fin_subtitle = RichTextField(blank=True)
+    fin_subtitle = RichTextField(blank=False, null=True)
+    fin_type = models.CharField(
+        max_length=50,
+        choices=[
+            ("option1", "Personal Finance"),
+            ("option2", "Investments"),
+            ("option3", "Retirement"),
+            ("option4", "Debt"),
+        ],
+        default="option1",
+        null=True,
+        blank=False,
+    )
+    fin_date = models.DateField("Post date", blank=False, null=True)
+    fin_image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
     content = StreamField(
         [
             ("title_and_text", blocks.TitleandTexBlock()),
@@ -46,6 +66,9 @@ class FinancialBLog(SeoMixin, Page):
     content_panels = Page.content_panels + [
         FieldPanel("fin_title"),
         FieldPanel("fin_subtitle"),
+        FieldPanel("fin_image"),
+        FieldPanel("fin_type"),
+        FieldPanel("fin_date"),
         FieldPanel("content"),
     ]
     # Indicate this is article-style content.
@@ -65,6 +88,15 @@ class TravelBLog(SeoMixin, Page):
     template = "travel/travel_page.html"
     travel_title = models.CharField(max_length=300, blank=False, null=True)
     travel_subtitle = RichTextField(blank=True)
+    travel_location = models.CharField(max_length=300, blank=False, null=True)
+    travel_date = models.DateField("Post date", blank=False, null=True)
+    travel_image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
     content = StreamField(
         [
             ("title_and_text", blocks.TitleandTexBlock()),
@@ -84,6 +116,9 @@ class TravelBLog(SeoMixin, Page):
     content_panels = Page.content_panels + [
         FieldPanel("travel_title"),
         FieldPanel("travel_subtitle"),
+        FieldPanel("travel_location"),
+        FieldPanel("travel_date"),
+        FieldPanel("travel_image"),
         FieldPanel("content"),
     ]
     # Indicate this is article-style content.
@@ -103,6 +138,27 @@ class TutorialsBLog(SeoMixin, Page):
     template = "tuto/tuto_page.html"
     tuto_title = models.CharField(max_length=300, blank=False, null=True)
     tuto_subtitle = RichTextField(blank=True)
+    tuto_learner_type = models.CharField(
+        max_length=50,
+        choices=[
+            ("option1", "Beginner"),
+            ("option2", "Intermediate"),
+            ("option3", "Advanced"),
+            ("option4", "Expert"),
+        ],
+        default="option1",
+        null=True,
+        blank=False,
+    )
+    tuto_duration = models.CharField(max_length=300, blank=False, null=True)
+    tuto_date = models.DateField("Post date", blank=False, null=True)
+    tuto_image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
     content = StreamField(
         [
             ("title_and_text", blocks.TitleandTexBlock()),
@@ -122,6 +178,10 @@ class TutorialsBLog(SeoMixin, Page):
     content_panels = Page.content_panels + [
         FieldPanel("tuto_title"),
         FieldPanel("tuto_subtitle"),
+        FieldPanel("tuto_learner_type"),
+        FieldPanel("tuto_duration"),
+        FieldPanel("tuto_date"),
+        FieldPanel("tuto_image"),
         FieldPanel("content"),
     ]
     # Indicate this is article-style content.
