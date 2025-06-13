@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
-    "postbuild": "copyfiles -u 1 dist/bundle.js ../../mBlogLive/static/js/",
+    "postbuild": "copyfiles -u 1 dist/bundle.js ../../mBlogLive/static/js/ && tailwindcss -i ./src/input.css -o ../../mBlogLive/static/css/output.css --minify",
     "dev": "npx @tailwindcss/cli -i ./src/input.css -o ../../mBlogLive/static/css/output.css --watch --verbose",
     "build:css": "tailwindcss -i ./src/input.css -o ../../mBlogLive/static/css/output.css --minify"
   },

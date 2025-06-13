@@ -1,13 +1,33 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailembeds_tags %}
+{% load wagtailcore_tags wagtailembeds_tags wagtailimages_tags static %}
 
 {% block content %}
 <main class="flex-grow pt-16 p-4 bg-white dark:bg-gray-900">
     <div class="container-cus">
         <h1>{{self.fin_title}}</h1>
-        <div class="">
+        <div class="flex items-center text-gray-500 dark:text-gray-400 ttext-xs md:text-xl mt-2">
+            {% if self.fin_type == "option1" %}
+            <span class="flex items-center text-teal-600 dark:text-teal-400"><i class="fas fa-tag mr-1"></i>Personal
+                Finance</span>
+            {% elif self.fin_type == "option2" %}
+            <span class="flex items-center text-teal-600 dark:text-teal-400"><i
+                    class="fas fa-chart-line mr-1"></i>Investments</span>
+            {% elif self.fin_type == "option3" %}
+            <span class="flex items-center text-teal-600 dark:text-teal-400"><i
+                    class="fas fa-piggy-bank mr-1"></i>Retirement</span>
+            {% elif self.fin_type == "option4" %}
+            <span class="flex items-center text-teal-600 dark:text-teal-400"><i
+                    class="fas fa-hand-holding-usd mr-1"></i>Debt</span>
+            {%endif %}
+            <span class="ml-5"><i class="fas fa-calendar-check mr-1"></i>{{self.fin_date}}</span>
+        </div>
+        <div class="mt-4">
             {{self.fin_subtitle|richtext}}
         </div>
+        {% image self.fin_image fill-900x400 as img %}
+        {% if img %}
+        <img src="{{img.url}}" alt="{{img.alt}}" class="w-auto h-auto object-fill object-center mt-4">
+        {% endif %}
     </div>
 
     {% for block in page.content %}

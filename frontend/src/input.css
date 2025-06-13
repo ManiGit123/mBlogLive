@@ -39,6 +39,6 @@ h6 {
       'mx-auto' is often redundant if 'container' is used by itself for centering,
       but it doesn't hurt and is explicit.
     */
-        @apply container mx-auto lg:px-24 xl:px-32 pt-4;
+        @apply container mx-auto lg:px-24 xl:px-36 pt-4;
     }
 }

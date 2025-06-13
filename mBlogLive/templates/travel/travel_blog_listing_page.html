@@ -10,14 +10,19 @@
             {% image post.travel_image fill-300x200 as img %}
             <a href="{{post.url}}"
                 class="group block relative rounded-lg shadow-xl overflow-hidden transform hover:scale-102 transition-all duration-300">
+                {% if img %}
                 <img src="{{img.url}}" alt="{{img.alt}}"
                     class="w-full h-64 object-cover object-center group-hover:scale-105 transition-transform duration-500">
+                {% else %}
+                <img src="{% static '/image/No image.png' %}" alt="No image to preview"
+                    class="w-full h-64 object-cover object-center group-hover:scale-105 transition-transform duration-500">
+                {% endif %}
                 <div
                     class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300">
                 </div>
                 <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
                     <h2 class="text-2xl font-bold mb-2">{{post.travel_title}}</h2>
-                    <div class="text-sm line-clamp-2 mb-4">{{post.travel_subtitle|richtext}}</div>
+                    <!-- <div class="text-sm line-clamp-2 mb-4">{{post.travel_subtitle|richtext}}</div> -->
                     <div class="flex items-center justify-between text-xs text-gray-200">
                         <span class="flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -27,7 +32,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg>{{post.travel_location}}</span>
-                        <span>{{post.travel_date}}</span>
+                        <span><i class="fas fa-calendar-check mr-1"></i>{{post.travel_date}}</span>
                     </div>
                 </div>
             </a>
