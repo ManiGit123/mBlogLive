@@ -1,4 +1,6 @@
-<nav class="bg-gray-100 dark:bg-gray-800 shadow-xl fixed w-full z-10">
+<!-- <nav class="bg-gray-100 dark:bg-gray-800 shadow-xl fixed w-full z-10"> -->
+{% load static %}
+<nav class="fixed inset-x-0 top-0 bg-gray-100 dark:bg-gray-800 shadow-xl z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex items-center">
@@ -59,7 +61,17 @@
                         id="user-menu-button" aria-expanded="false" aria-haspopup="true"
                         data-dropdown="desktop-account-dropdown">
                         <span class="sr-only">Open user menu</span>
-                        <img class="h-8 w-8 rounded-full" src="https://via.placeholder.com/150" alt="User avatar">
+                        {% if user.is_authenticated %}
+                        {% if user.first_name and user.last_name %}
+                        <img class="h-8 w-8 rounded-full mr-1"
+                            src="https://ui-avatars.com/api/?name={{user.first_name}}+{{user.last_name}}&background=0D8ABC&color=fff"
+                            alt="User avatar">
+                        {% else %}
+                        <img class="h-8 w-8 rounded-full mr-1"
+                            src="https://ui-avatars.com/api/?name={{user.username}}&background=0D8ABC&color=fff"
+                            alt="User avatar">
+                        {% endif %}
+                        {% endif %}
                     </button>
                     <div id="desktop-account-dropdown"
                         class="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5 focus:outline-none hidden dropdown-menu">
@@ -161,8 +173,20 @@
                 <button
                     class="flex items-center px-3 py-2 rounded-md text-base font-medium w-full text-left mobile-dropdown-btn focus:outline-none"
                     data-dropdown="mobile-account-dropdown">
-                    <img class="h-10 w-10 rounded-full mr-3" src="https://via.placeholder.com/150" alt="User avatar">
-                    <span class="text-gray-800 dark:text-white">Mani kandan</span>
+                    <!-- <img class="h-10 w-10 rounded-full mr-3" src="https://via.placeholder.com/150" alt="User avatar"> -->
+                    {% if user.is_authenticated %}
+                    {% if user.first_name and user.last_name %}
+                    <img class="h-8 w-8 rounded-full mr-1"
+                        src="https://ui-avatars.com/api/?name={{user.first_name}}+{{user.last_name}}&background=0D8ABC&color=fff"
+                        alt="User avatar">
+                    <span class="text-gray-800 dark:text-white">{{user.first_name}}</span>
+                    {% else %}
+                    <img class="h-8 w-8 rounded-full mr-1"
+                        src="https://ui-avatars.com/api/?name={{user.username}}&background=0D8ABC&color=fff"
+                        alt="User avatar">
+                    <span class="text-gray-800 dark:text-white">{{user.username}}</span>
+                    {% endif %}
+                    {% endif %}
                     <svg class="inline-block ml-1 w-4 h-4 transform transition-transform duration-200" fill="none"
                         stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>

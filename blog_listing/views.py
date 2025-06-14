@@ -5,12 +5,17 @@ from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from home.models import FinancialBLog, TravelBLog, TutorialsBLog
 
 # Create your views here.
 
 
 def hoempage(request):
-    return render(request, template_name="home/landing_page.html", context={})
+    travel = TravelBLog.objects.live().public()
+    fin = FinancialBLog.objects.live().public()
+    tuto = TutorialsBLog.objects.live().public()
+    context = {"travel": travel[0], "fin": fin[0], "tuto": tuto[0]}
+    return render(request, template_name="home/landing_page.html", context=context)
 
 
 @staff_member_required

@@ -1,11 +1,206 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags wagtailimages_tags static %}
-
-
 {% block content %}
 <main class="flex-grow pt-16 p-4 bg-white dark:bg-gray-900">
-    <div class="container-cus">
-        <p>This is landingpage</p>
-    </div>
+    <section class="hero-bg pt-32 md:pt-44 pb-20 md:pb-32 text-center text-white relative overflow-hidden">
+        <!-- Background image -->
+        <img src="{% static 'image/banner image.jpeg' %}" alt="World-map desk scene"
+            class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none" />
+
+        <!-- Optional dark overlay for better text contrast -->
+        <div class="absolute inset-0 bg-black/40">
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 drop-shadow-lg">
+                Your Guide to a Fulfilling Life Journey
+            </h1>
+            <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-90 drop-shadow">
+                Explore insightful articles on travel, master your finances, and learn new skills with our
+                easy-to-follow tutorials.
+            </p>
+            <a href="#blog"
+                class="inline-block bg-white text-blue-600 hover:bg-blue-50 hover:text-blue-700 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-gray-700 dark:hover:text-blue-300 px-8 py-3 rounded-full text-lg font-semibold shadow-lg transform transition duration-300 hover:scale-105">
+                Start Your Adventure
+            </a>
+        </div>
+
+        <!-- Background SVG -->
+        <!-- <div class="absolute inset-0 z-0 opacity-20">
+            <svg class="w-full h-50" viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#fff" fill-opacity="0.1"
+                    d="M0,192L48,181.3C96,171,192,149,288,149.3C384,149,480,171,576,192C672,213,768,235,864,229.3C960,224,1056,192,1152,176C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+                </path>
+            </svg>
+        </div> -->
+    </section>
+
+    <section id="blog" class="py-16 md:py-24 bg-white dark:bg-gray-800">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-gray-800 dark:text-gray-100">What We Cover</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div
+                    class="bg-gray-100 dark:bg-gray-700 p-8 rounded-lg shadow-lg hover:shadow-xl transform transition duration-300 hover:scale-105">
+                    <svg class="w-16 h-16 mx-auto mb-4 text-blue-500 dark:text-blue-300" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                    </svg>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-gray-100">Travel Adventures</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Discover breathtaking destinations, practical
+                        travel
+                        tips, and inspiring stories from around the globe.</p>
+                    <a href="/travel-blog/" class="text-blue-600 dark:text-blue-400 hover:underline font-medium">Read
+                        Travel Blogs
+                        &rarr;</a>
+                </div>
+                <div
+                    class="bg-gray-100 dark:bg-gray-700 p-8 rounded-lg shadow-lg hover:shadow-xl transform transition duration-300 hover:scale-105">
+                    <svg class="w-16 h-16 mx-auto mb-4 text-green-500 dark:text-green-300" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 8h6m-5 0v3m-2-3h2a3 3 0 013 3v5a3 3 0 01-3 3H7a3 3 0 01-3-3V8a3 3 0 013-3h2m0 0h1v4m-1-4h1m-1 4v.01M12 12h.01M12 16h.01">
+                        </path>
+                    </svg>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-gray-100">Financial Freedom</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Learn to manage your money, invest wisely, and
+                        achieve
+                        your financial goals with our expert guidance.</p>
+                    <a href="/finacial-blog/"
+                        class="text-blue-600 dark:text-blue-400 hover:underline font-medium">Explore Finance
+                        &rarr;</a>
+                </div>
+                <div
+                    class="bg-gray-100 dark:bg-gray-700 p-8 rounded-lg shadow-lg hover:shadow-xl transform transition duration-300 hover:scale-105">
+                    <svg class="w-16 h-16 mx-auto mb-4 text-purple-500 dark:text-purple-300" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                    </svg>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-gray-100">Skill-Building Tutorials
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Unlock new potentials with our step-by-step
+                        tutorials
+                        on various topics, from tech to lifestyle.</p>
+                    <a href="/tutorial-blog/" class="text-blue-600 dark:text-blue-400 hover:underline font-medium">Dive
+                        into Tutorials
+                        &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-blue-50 dark:bg-gray-900">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-gray-800 dark:text-gray-100">Ready to Start Your
+                Journey?
+            </h2>
+            <p class="text-lg text-gray-700 dark:text-gray-300 mb-12 max-w-3xl mx-auto">
+                Join our community of lifelong learners and adventurers. Get the latest insights directly in your inbox.
+            </p>
+            <form class="max-w-xl mx-auto flex flex-col md:flex-row gap-4">
+                <input type="email" placeholder="Enter your email"
+                    class="flex-grow px-5 py-3 rounded-full border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
+                    required>
+                <button type="submit"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold shadow-md transform transition duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    Subscribe Now
+                </button>
+            </form>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+                {% image travel.travel_image fill-300x200 as img %}
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 flex flex-col">
+                    <img src="{{ img.url }}" alt="{{ img.alt }}" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col flex-1">
+                        <h4 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">{{ travel.travel_title
+                            }}
+                        </h4>
+                        <div class="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">
+                            {{ travel.travel_subtitle|richtext }}
+                        </div>
+                        <a href="{{ travel.url }}"
+                            class="text-blue-600 dark:text-blue-400 hover:underline font-medium mt-auto">Read
+                            More &rarr;</a>
+                    </div>
+                </div>
+
+                {% image fin.fin_image fill-300x200 as img %}
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 flex flex-col">
+                    <img src="{{ img.url }}" alt="{{ img.alt }}" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col flex-1">
+                        <h4 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">{{ fin.fin_title }}</h4>
+                        <div class="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">
+                            {{ fin.fin_subtitle|richtext }}
+                        </div>
+                        <a href="{{ fin.url }}"
+                            class="text-blue-600 dark:text-blue-400 hover:underline font-medium mt-auto">Read
+                            More &rarr;</a>
+                    </div>
+                </div>
+
+                {% image tuto.tuto_image fill-300x200 as img %}
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 flex flex-col">
+                    {% if img %}
+                    <img src="{{ img.url }}" alt="{{ img.alt }}" class="w-full h-48 object-cover">
+                    {% else %}
+                    <img src="{% static '/image/No image.png' %}" alt="No image to preview"
+                        class="w-full h-48 object-cover">
+                    {% endif %}
+                    <div class="p-6 flex flex-col flex-1">
+                        <h4 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">{{ tuto.tuto_title }}
+                        </h4>
+                        <div class="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">
+                            {{ tuto.tuto_subtitle|richtext }}
+                        </div>
+                        <a href="{{ tuto.url }}"
+                            class="text-blue-600 dark:text-blue-400 hover:underline font-medium mt-auto">Read
+                            More &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="py-16 md:py-24 bg-white dark:bg-gray-800 text-center">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-800 dark:text-gray-100">Tools Coming Soon!</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
+                We're constantly working to bring you even more value. Soon, you'll find powerful tools to help you on
+                your
+                journey. Stay tuned!
+            </p>
+            <div class="flex justify-center items-center space-x-6 text-gray-400 dark:text-gray-500">
+                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z">
+                    </path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="M9.75 17L9.75 21C9.75 22.1046 10.6454 23 11.75 23L12.25 23C13.3546 23 14.25 22.1046 14.25 21L14.25 17C14.25 15.8954 13.3546 15 12.25 15L11.75 15C10.6454 15 9.75 15.8954 9.75 17Z">
+                    </path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z">
+                    </path>
+                </svg>
+                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="M13 10V3L4 14h7v7l9-11h-7z">
+                    </path>
+                </svg>
+            </div>
+            <a href="#newsletter"
+                class="inline-block mt-8 text-blue-600 dark:text-blue-400 hover:underline font-medium">Get
+                Notified When Tools Launch &rarr;</a>
+        </div>
+    </section>
 </main>
 {% endblock %}
