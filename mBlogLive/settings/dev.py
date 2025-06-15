@@ -2,10 +2,11 @@ from .base import *
 import os
 
 # SECURITY WARNING: don't run with debug turned on in production!
+renderUsername = os.environ.get("MY_USERNAME")
 if os.getenv("USERNAME") == "manik":
     print("debug is True -----------", os.getenv("USERNAME"))
     DEBUG = True
-elif os.environ.get("MY_USERNAME") == "manirender":
+elif renderUsername == "manirender":
     print(
         "debug is False -----------",
         "render environ read success",
@@ -13,7 +14,7 @@ elif os.environ.get("MY_USERNAME") == "manirender":
     )
     DEBUG = False
 else:
-    print("debug is False -----------", os.getenv("USERNAME"))
+    print("debug is False -----------", os.getenv("MY_USERNAME"))
     DEBUG = False
 
 # SECURITY WARNING: keep the secret key used in production secret!
