@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags wagtailimages_tags static %}
+{% block title %}
+Welcome to GlobeFinTutor!
+{% endblock %}
 {% block content %}
 <main class="flex-grow pt-16 p-4 bg-white dark:bg-gray-900">
     <section class="hero-bg pt-32 md:pt-44 pb-20 md:pb-32 text-center text-white relative overflow-hidden">
         <!-- Background image -->
-        <img src="{% static 'image/banner image.jpeg' %}" alt="World-map desk scene"
-            class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none" />
+        <img src="{% static 'image/banner_image3.jpg' %}" alt="World-map desk scene"
+            class="absolute inset-0 w-full h-full object-fill pointer-events-none select-none" />
 
         <!-- Optional dark overlay for better text contrast -->
         <div class="absolute inset-0 bg-black/40">
@@ -34,7 +37,7 @@
         </div> -->
     </section>
 
-    <section id="blog" class="py-16 md:py-24 bg-white dark:bg-gray-800">
+    <section id="blog" class="py-10 md:py-16 bg-white dark:bg-gray-800">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-12 text-gray-800 dark:text-gray-100">What We Cover</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -89,7 +92,7 @@
         </div>
     </section>
 
-    <section class="py-16 md:py-24 bg-blue-50 dark:bg-gray-900">
+    <section id="newsletter" class="py-16 md:py-24 bg-blue-50 dark:bg-gray-900">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-8 text-gray-800 dark:text-gray-100">Ready to Start Your
                 Journey?
@@ -112,8 +115,8 @@
                     class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 flex flex-col">
                     <img src="{{ img.url }}" alt="{{ img.alt }}" class="w-full h-48 object-cover">
                     <div class="p-6 flex flex-col flex-1">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">{{ travel.travel_title
-                            }}
+                        <h4 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">
+                            {{ travel.travel_title }}
                         </h4>
                         <div class="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">
                             {{ travel.travel_subtitle|richtext }}

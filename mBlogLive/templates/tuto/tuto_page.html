@@ -3,46 +3,48 @@
 
 {% block content %}
 <main class="flex-grow pt-16 p-4 bg-white dark:bg-gray-900">
-    <div class="container-cus">
-        <h1>{{self.tuto_title}}</h1>
-        <div class="flex items-center text-gray-500 dark:text-gray-400 text-xs md:text-xl">
-            <div class="flex items-center">
-                {% if self.tuto_learner_type == "option1" %}
-                <span class="mr-5 flex items-center text-green-600 dark:text-green-400"><i
-                        class="fas fa-seedling mr-1"></i>Beginner</span>
-                {% elif self.tuto_learner_type == "option2" %}
-                <span class="mr-5 flex items-center text-yellow-600 dark:text-yellow-400"><i
-                        class="fas fa-star mr-1"></i>Intermediate</span>
-                {% elif self.tuto_learner_type == "option3" %}
-                <span class="mr-5 flex items-center text-red-600 dark:text-red-400"><i
-                        class="fas fa-fire mr-1"></i>Advanced</span>
-                {% elif self.tuto_learner_type == "option4" %}
-                <span class="mr-5 flex items-center text-purple-600 dark:text-purple-400"><i
-                        class="fas fa-brain mr-1"></i>Expert</span>
-                {%endif %}
-                <span class="flex items-center mr-5"><i class="fas fa-clock mr-1"></i>{{self.tuto_duration}}</span>
-                <span class="flex items-center"><i class="fas fa-calendar-check mr-1"></i>{{self.tuto_date}}</span>
+    <article>
+        <div class="container-cus">
+            <h1>{{self.tuto_title}}</h1>
+            <div class="flex items-center text-gray-500 dark:text-gray-400 text-xs md:text-xl">
+                <div class="flex items-center">
+                    {% if self.tuto_learner_type == "option1" %}
+                    <span class="mr-5 flex items-center text-green-600 dark:text-green-400"><i
+                            class="fas fa-seedling mr-1"></i>Beginner</span>
+                    {% elif self.tuto_learner_type == "option2" %}
+                    <span class="mr-5 flex items-center text-yellow-600 dark:text-yellow-400"><i
+                            class="fas fa-star mr-1"></i>Intermediate</span>
+                    {% elif self.tuto_learner_type == "option3" %}
+                    <span class="mr-5 flex items-center text-red-600 dark:text-red-400"><i
+                            class="fas fa-fire mr-1"></i>Advanced</span>
+                    {% elif self.tuto_learner_type == "option4" %}
+                    <span class="mr-5 flex items-center text-purple-600 dark:text-purple-400"><i
+                            class="fas fa-brain mr-1"></i>Expert</span>
+                    {%endif %}
+                    <span class="flex items-center mr-5"><i class="fas fa-clock mr-1"></i>{{self.tuto_duration}}</span>
+                    <span class="flex items-center"><i class="fas fa-calendar-check mr-1"></i>{{self.tuto_date}}</span>
+                </div>
             </div>
+            <div class="dark:text-gray-300 mt-4">
+                {{self.tuto_subtitle|richtext}}
+            </div>
+            {% image self.tuto_image fill-900x400 as img %}
+            {% if img %}
+            <img src="{{img.url}}" alt="{{img.alt}}" class="w-auto h-auto object-cover flex-shrink-0 mt-4">
+            {% endif %}
         </div>
-        <div class="dark:text-gray-300 mt-4">
-            {{self.tuto_subtitle|richtext}}
-        </div>
-        {% image self.tuto_image fill-900x400 as img %}
-        {% if img %}
-        <img src="{{img.url}}" alt="{{img.alt}}" class="w-auto h-auto object-cover flex-shrink-0 mt-4">
-        {% endif %}
-    </div>
 
-    {% for block in page.content %}
-    {% if block.block_type == 'embeded' %}
-    <div class="container-cus">
-        {% include_block block %}
-    </div>
-    {% else %}
-    <div class="container-cus">
-        {% include_block block %}
-    </div>
-    {% endif %}
-    {% endfor %}
+        {% for block in page.content %}
+        {% if block.block_type == 'embeded' %}
+        <div class="container-cus">
+            {% include_block block %}
+        </div>
+        {% else %}
+        <div class="container-cus">
+            {% include_block block %}
+        </div>
+        {% endif %}
+        {% endfor %}
+    </article>
 </main>
 {% endblock %}
