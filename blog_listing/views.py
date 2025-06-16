@@ -14,7 +14,7 @@ def hoempage(request):
     travel = TravelBLog.objects.live().public()
     fin = FinancialBLog.objects.live().public()
     tuto = TutorialsBLog.objects.live().public()
-    context = {"travel": travel[0], "fin": fin[0], "tuto": tuto[0]}
+    context = {"travel": travel[-1], "fin": fin[-1], "tuto": tuto[-1]}
     return render(request, template_name="home/landing_page.html", context=context)
 
 

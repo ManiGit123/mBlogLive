@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags wagtailimages_tags static %}
 {% block title %}
-Welcome to GlobeFinTutor!
+Welcome to M2M!
 {% endblock %}
 {% block content %}
 <main class="flex-grow pt-16 p-4 bg-white dark:bg-gray-900">
@@ -113,7 +113,12 @@ Welcome to GlobeFinTutor!
                 {% image travel.travel_image fill-300x200 as img %}
                 <div
                     class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 flex flex-col">
+                    {% if img %}
                     <img src="{{ img.url }}" alt="{{ img.alt }}" class="w-full h-48 object-cover">
+                    {% else %}
+                    <img src="{% static 'image/No image.png' %}" alt="No image to preview"
+                        class="w-full h-48 object-cover">
+                    {% endif %}
                     <div class="p-6 flex flex-col flex-1">
                         <h4 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">
                             {{ travel.travel_title }}
@@ -130,7 +135,12 @@ Welcome to GlobeFinTutor!
                 {% image fin.fin_image fill-300x200 as img %}
                 <div
                     class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 flex flex-col">
+                    {% if img %}
                     <img src="{{ img.url }}" alt="{{ img.alt }}" class="w-full h-48 object-cover">
+                    {% else %}
+                    <img src="{% static 'image/No image.png' %}" alt="No image to preview"
+                        class="w-full h-48 object-cover">
+                    {% endif %}
                     <div class="p-6 flex flex-col flex-1">
                         <h4 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">{{ fin.fin_title }}</h4>
                         <div class="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">

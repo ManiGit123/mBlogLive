@@ -39,3 +39,18 @@ if not DEBUG:
             "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
         },
     }
+    if (
+        os.environ.get("CLOUD_NAME")
+        and os.environ.get("API_KEY")
+        and os.environ.get("API_SECRET")
+    ):
+        print("cloudinary env var works fine!............")
+        CLOUDINARY_STORAGE = {
+            "CLOUD_NAME": os.environ.get("CLOUD_NAME"),
+            "API_KEY": os.environ.get("API_KEY"),
+            "API_SECRET": os.environ.get("API_SECRET"),
+        }
+if not DEBUG:
+    import logging
+
+    logging.basicConfig(level=logging.DEBUG)
