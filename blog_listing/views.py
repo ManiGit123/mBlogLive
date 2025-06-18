@@ -23,6 +23,10 @@ def hoempage(request):
     return render(request, template_name="home/landing_page.html", context=context)
 
 
+def test(request):
+    return render(request, template_name="home/test.html")
+
+
 @staff_member_required
 def download_sqlite_db(request):
     db_path = os.path.join(settings.BASE_DIR, "db.sqlite3")
