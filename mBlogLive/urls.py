@@ -5,10 +5,19 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from search import views as search_views
-from wagtail.contrib.sitemaps.views import sitemap
+
+# from wagtail.contrib.sitemaps.views import sitemap as wagtail_sitemap
+from django.contrib.sitemaps.views import sitemap as djsitemap
+from .sitemaps import CombinedSitemap  # StaticViewSitemap  # , BlogSitemap
+
 
 urlpatterns = [
-    path("sitemap.xml", sitemap),
+    path(
+        "sitemap.xml",
+        djsitemap,
+        {"sitemaps": {"combined": CombinedSitemap()}},
+        name="sitemap",
+    ),
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
@@ -34,3 +43,12 @@ urlpatterns = urlpatterns + [
     # of your site, rather than the site root:
     #    path("pages/", include(wagtail_urls)),
 ]
+
+
+# path("sitemap.xml", wagtail_sitemap),
+# path(
+#     "sitemap.xml",
+#     djsitemap,
+#     {"sitemaps": sitemaps},
+#     name="django.contrib.sitemaps.views.sitemap",
+# ),

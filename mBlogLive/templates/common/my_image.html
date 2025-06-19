@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="flex-grow pt-16 p-4 bg-white dark:bg-gray-900">
+    <h1>{{image.id}}</h1>
+    <p>{{image.image.url}}</p>
+    <img src="{{ image.image.url }}" alt="My Image" style="max-width: 100%; height: auto;">
+</main>
+{% endblock %}

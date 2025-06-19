@@ -6,8 +6,8 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from home.models import FinancialBLog, TravelBLog, TutorialsBLog
-
-# Create your views here.
+from django.views.generic import DetailView
+from .models import MyImage
 
 
 def hoempage(request):
@@ -50,6 +50,16 @@ def robots_txt(request):
         "User-agent: *",
         "Disallow: /admin/",
         "Disallow: /search/",
-        "Sitemap: https://mbloglive.onrender.com/sitemap.xml",
+        "Sitemap: https://www.maptomoney.in/sitemap.xml",
     ]
     return HttpResponse("\n".join(content), content_type="text/plain")
+
+
+class MyImageDetailView(DetailView):
+    model = MyImage  # Your model name
+    template_name = "common/my_image.html"  # Your template path
+    context_object_name = "image"  # Variable name in template
+
+    def get_queryset(self):
+        # Only show published products
+        return super().get_queryset().filter(id=self.kwargs["pk"])

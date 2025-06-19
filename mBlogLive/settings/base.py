@@ -27,6 +27,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 ALLOWED_HOSTS = ["127.0.0.1:8000", "*"]
 CSRF_TRUSTED_ORIGINS = ["https://mbloglive.onrender.com"]
+SITE_ID = 1
 
 INSTALLED_APPS = [
     "home",
@@ -34,6 +35,7 @@ INSTALLED_APPS = [
     "search",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.contrib.sitemaps",
     "wagtail.embeds",
     "wagtailseo",  # Wagtail - seo
     "wagtail.contrib.settings",  # Wagtail - seo
@@ -49,6 +51,7 @@ INSTALLED_APPS = [
     "modelcluster",
     "taggit",
     "django.contrib.sitemaps",
+    "django.contrib.sites",
     "django_filters",
     "django.contrib.admin",
     "django.contrib.auth",
