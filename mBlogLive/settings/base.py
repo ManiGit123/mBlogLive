@@ -25,8 +25,20 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 
 # Application definition
-ALLOWED_HOSTS = ["127.0.0.1:8000", "*"]
-CSRF_TRUSTED_ORIGINS = ["https://mbloglive.onrender.com"]
+ALLOWED_HOSTS = [
+    "127.0.0.1:8000",
+    "127.0.0.1",
+    "mbloglive.onrender.com",
+    "maptomoney.in",
+    "www.maptomoney.in",
+]
+CSRF_TRUSTED_ORIGINS = [
+    "https://mbloglive.onrender.com",
+    "https://www.maptomoney.in",
+    "https://maptomoney.in",
+]
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
 SITE_ID = 1
 
 INSTALLED_APPS = [

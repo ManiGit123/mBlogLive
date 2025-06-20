@@ -42,6 +42,26 @@ class CardBlock(blocks.StructBlock):
         label = "Card Blocks"
 
 
+class CarouselBlock(blocks.StructBlock):
+    # cards with image text and buttons by ListBlock
+    title = blocks.CharBlock(required=True, help_text="Add your title")
+    message = blocks.CharBlock(required=True, help_text="Add your message")
+    carousels = blocks.ListBlock(
+        blocks.StructBlock(
+            [
+                ("image", ImageChooserBlock(required=True)),
+                ("title", blocks.CharBlock(required=True, max_length=40)),
+                ("text", blocks.TextBlock(required=True, max_length=200)),
+            ]
+        )
+    )
+
+    class Meta:
+        template = "blocks/carousel_block.html"
+        icon = "image"
+        label = "Carousel Blocks"
+
+
 class CTABlock(blocks.StructBlock):
     # simple call to action section
     title = blocks.CharBlock(required=True, max_length=60)
