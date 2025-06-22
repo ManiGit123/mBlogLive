@@ -54,6 +54,7 @@ class FinancialBLog(SeoMixin, Page):
             ("simple_rich_text", blocks.SimpleRichTextBlock()),  # way 2
             ("card", blocks.CardBlock()),
             ("carousel", blocks.CarouselBlock()),
+            ("accordion", blocks.AccordionBlock()),
             ("cta", blocks.CTABlock()),
             ("codeblock", CodeBlock(label="Code block", classname="container")),
             ("embedded", EmbedBlock()),
@@ -105,6 +106,7 @@ class TravelBLog(SeoMixin, Page):
             ("simple_rich_text", blocks.SimpleRichTextBlock()),  # way 2
             ("card", blocks.CardBlock()),
             ("carousel", blocks.CarouselBlock()),
+            ("accordion", blocks.AccordionBlock()),
             ("cta", blocks.CTABlock()),
             ("codeblock", CodeBlock(label="Code block", classname="container")),
             ("embedded", EmbedBlock()),
@@ -168,6 +170,7 @@ class TutorialsBLog(SeoMixin, Page):
             ("simple_rich_text", blocks.SimpleRichTextBlock()),  # way 2
             ("card", blocks.CardBlock()),
             ("carousel", blocks.CarouselBlock()),
+            ("accordion", blocks.AccordionBlock()),
             ("cta", blocks.CTABlock()),
             ("codeblock", CodeBlock(label="Code block", classname="container")),
             ("embedded", EmbedBlock()),

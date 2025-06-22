@@ -1,3 +1,4 @@
+/* ========================================================================= */
 /* wagtailembedded video responsive */
 .responsive-object {
     position: relative;
@@ -13,7 +14,7 @@
     height: 100%;
 }
 
-
+/* ========================================================================= */
 /* mobile navbar css */
 /* Optional: Basic transition for dark mode */
 body {
@@ -34,11 +35,18 @@ body {
     opacity: 1;
 }
 
-/* Others */
+/* ========================================================================= */
+/* travel blog listing css */
 .hero-bg {
     background-image: linear-gradient(to right top, #6EE7B7, #3B82F6);
 }
 
 .dark .hero-bg {
     background-image: linear-gradient(to right top, #14B8A6, #2563EB);
+}
+
+/* ========================================================================= */
+/* Accordion css */
+.accordion-content {
+    transition: max-height 0.3s ease-out, opacity 0.2s ease;
 }

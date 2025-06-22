@@ -62,6 +62,24 @@ class CarouselBlock(blocks.StructBlock):
         label = "Carousel Blocks"
 
 
+class AccordionBlock(blocks.StructBlock):
+    # cards with image text and buttons by ListBlock
+    title = blocks.CharBlock(required=True, help_text="Add your title")
+    accordions = blocks.ListBlock(
+        blocks.StructBlock(
+            [
+                ("title", blocks.CharBlock(required=True, max_length=40)),
+                ("text", blocks.RichTextBlock(required=True, max_length=500)),
+            ]
+        )
+    )
+
+    class Meta:
+        template = "blocks/accordion_block.html"
+        icon = "list-ul"
+        label = "Accordion Blocks"
+
+
 class CTABlock(blocks.StructBlock):
     # simple call to action section
     title = blocks.CharBlock(required=True, max_length=60)
