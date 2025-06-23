@@ -2,6 +2,7 @@
 from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
 from django.db import models
+from wagtail.blocks import StructBlock, ChoiceBlock, TextBlock
 
 
 class TitleandTexBlock(blocks.StructBlock):
@@ -154,3 +155,23 @@ class ButtonLinkBlock(blocks.StructBlock):
         template = "blocks/button_picker_block.html"
         icon = "link-external"
         label = "Button Link"
+
+
+class CustomCodeBlock(StructBlock):
+    language = ChoiceBlock(
+        choices=[
+            ("python", "Python"),
+            ("javascript", "JavaScript"),
+            ("html", "HTML"),
+            ("css", "CSS"),
+            ("json", "JSON"),
+            ("bash", "Bash"),
+        ],
+        default="python",
+    )
+    code = TextBlock()
+
+    class Meta:
+        template = "blocks/custom_code_block.html"
+        icon = "code"
+        label = "Custom Code Block"

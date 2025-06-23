@@ -189,4 +189,40 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // ========================== wagtail-codeblock js =====================================
+    // =====================================================================================
+    document.querySelectorAll('.custom-code-block .copy-button').forEach(button => {
+        button.addEventListener('click', function () {
+            const codeBlock = this.closest('.custom-code-block').querySelector('pre code');
+            navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                this.textContent = 'Copied!';
+                setTimeout(() => this.textContent = 'Copy', 2000);
+            });
+        });
+    });
+
+    // Single event delegation for all download buttons
+    document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('download-button')) {
+            const button = e.target;
+            const codeId = button.getAttribute('data-target');
+            const filename = button.getAttribute('data-filename');
+            const codeBlock = document.getElementById(codeId);
+
+            if (codeBlock) {
+                const codeContent = codeBlock.textContent;
+                const blob = new Blob([codeContent], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+        }
+    });
 });

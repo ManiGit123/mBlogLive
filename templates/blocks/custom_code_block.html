@@ -1,0 +1,17 @@
+{% load wagtailcore_tags %}
+
+<div class="custom-code-block">
+    <div class="code-header">
+        <span class="language-label">{{ value.language }}</span>
+        <div>
+            <button class="copy-button">Copy</button>
+            <button class="download-button" data-filename="{{ value.language }}-code.txt"
+                data-target="code-{{ block_id }}">Download</button>
+        </div>
+    </div>
+    {% with language=value.language code=value.code %}
+    {% include 'wagtailcodeblock/code_block.html' %}
+    {% endwith %}
+    <pre
+        class="line-numbers hidden"><code class="language-{{ value.language }}" id="code-{{ block_id }}">{{ value.code }}</code></pre>
+</div>
