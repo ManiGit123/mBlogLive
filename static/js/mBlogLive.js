@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = 0;
 
     function goToSlide(index) {
-        console.log(index)
+        // console.log(index)
         currentIndex = index;
         slides.style.transform = `translateX(-${currentIndex * 100}%)`;
 
@@ -190,26 +190,90 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    document.addEventListener('click', function (e) {
+        const button = e.target.closest('.acc-expandable');
+        if (button) {
+            const targetId = button.getAttribute('data-target');
+            const iconId = button.getAttribute('data-icon');
+            const content = document.getElementById(targetId);
+            const icon = document.getElementById(iconId);
+
+            // SVG for Minus icon
+            const minusSVG = `
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+            <path d="M3.75 7.25a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5Z" />
+            </svg>
+            `;
+
+            // SVG for Plus icon
+            const plusSVG = `
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+            <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+            </svg>
+            `;
+
+            if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+                content.style.maxHeight = '0';
+                icon.innerHTML = plusSVG;
+            } else {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                icon.innerHTML = minusSVG;
+            }
+        }
+    });
+
     // ========================== wagtail-codeblock js =====================================
     // =====================================================================================
     document.querySelectorAll('.custom-code-block .copy-button').forEach(button => {
         button.addEventListener('click', function () {
             const codeBlock = this.closest('.custom-code-block').querySelector('pre code');
+            const buttonTextSpan = this.querySelector('.button-text'); // Get the span element
+
             navigator.clipboard.writeText(codeBlock.textContent).then(() => {
-                this.textContent = 'Copied!';
-                setTimeout(() => this.textContent = 'Copy', 2000);
+                if (buttonTextSpan) { // Make sure the span exists
+                    buttonTextSpan.textContent = 'Copied!';
+                }
+                // You can also change the icon here if you want a "check" icon temporarily
+                const icon = this.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-copy'); // Remove copy icon
+                    icon.classList.add('fa-check'); // Add check icon
+                }
+
+                setTimeout(() => {
+                    if (buttonTextSpan) {
+                        buttonTextSpan.textContent = 'Copy';
+                    }
+                    if (icon) {
+                        icon.classList.remove('fa-check'); // Remove check icon
+                        icon.classList.add('fa-copy'); // Bring back copy icon
+                    }
+                }, 2000);
             });
         });
     });
 
     // Single event delegation for all download buttons
     document.addEventListener('click', function (e) {
-        if (e.target.classList.contains('download-button')) {
-            const button = e.target;
+        const button = e.target.closest('.download-button');
+        if (button) {
             const codeId = button.getAttribute('data-target');
             const filename = button.getAttribute('data-filename');
             const codeBlock = document.getElementById(codeId);
+            const buttonTextSpan = button.querySelector('.button-text');
+            const icon = button.querySelector('i');
 
+            // Dynamically get the file extension from the code block's data attribute
+            if (filename?.includes("python")) {
+                var fileExtension = "py";
+            } else if (filename?.includes("html")) {
+                var fileExtension = "html";
+            } else if (filename?.includes("javascript")) {
+                var fileExtension = "js";
+            } else {
+                var fileExtension = "txt";
+            }
+            const filenameExt = `${filename}.${fileExtension || 'txt'}`
             if (codeBlock) {
                 const codeContent = codeBlock.textContent;
                 const blob = new Blob([codeContent], { type: 'text/plain' });
@@ -217,12 +281,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = filename;
+                a.download = filenameExt;
                 document.body.appendChild(a);
                 a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
+                // Provide "Downloaded!" feedback
+                if (buttonTextSpan) {
+                    buttonTextSpan.textContent = 'Downloading...';
+                }
+                if (icon) {
+                    icon.classList.remove('fa-download');
+                    // icon.classList.add('fa-check'); // Change to checkmark icon
+                    icon.classList.add('fa-spinner', 'fa-spin');
+                }
+                // Clean up and reset button state after a short delay
+                setTimeout(() => {
+                    if (buttonTextSpan) {
+                        buttonTextSpan.textContent = 'Downloaded!'; // Reset text
+                    }
+                    if (icon) {
+                        icon.classList.remove('fa-spinner', 'fa-spin');
+                        icon.classList.add('fa-check'); // add checkmark
+                        // icon.classList.add('fa-download'); // Reset to download icon
+                    }
+                }, 1000); // Display "Downloaded!" for 2 seconds
+
+                // Clean up and reset button state after a short delay
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+
+                    if (buttonTextSpan) {
+                        buttonTextSpan.textContent = 'Download'; // Reset text
+                    }
+                    if (icon) {
+                        // icon.classList.remove('fa-spinner', 'fa-spin');
+                        icon.classList.remove('fa-check'); // Remove checkmark
+                        icon.classList.add('fa-download'); // Reset to download icon
+                    }
+                }, 3000); // Display "Downloaded!" for 2 seconds
             }
         }
     });
+
 });

@@ -67,11 +67,16 @@ class FinancialBLog(SeoMixin, Page):
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel("fin_title"),
-        FieldPanel("fin_subtitle"),
-        FieldPanel("fin_image"),
-        FieldPanel("fin_type"),
-        FieldPanel("fin_date"),
+        MultiFieldPanel(
+            [
+                FieldPanel("fin_title"),
+                FieldPanel("fin_subtitle"),
+                FieldPanel("fin_image"),
+                FieldPanel("fin_type"),
+                FieldPanel("fin_date"),
+            ],
+            heading="Banner Options",
+        ),
         FieldPanel("content"),
     ]
     # Indicate this is article-style content.
@@ -120,11 +125,16 @@ class TravelBLog(SeoMixin, Page):
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel("travel_title"),
-        FieldPanel("travel_subtitle"),
-        FieldPanel("travel_location"),
-        FieldPanel("travel_date"),
-        FieldPanel("travel_image"),
+        MultiFieldPanel(
+            [
+                FieldPanel("travel_title"),
+                FieldPanel("travel_subtitle"),
+                FieldPanel("travel_location"),
+                FieldPanel("travel_date"),
+                FieldPanel("travel_image"),
+            ],
+            heading="Banner Options",
+        ),
         FieldPanel("content"),
     ]
     # Indicate this is article-style content.
@@ -185,12 +195,17 @@ class TutorialsBLog(SeoMixin, Page):
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel("tuto_title"),
-        FieldPanel("tuto_subtitle"),
-        FieldPanel("tuto_learner_type"),
-        FieldPanel("tuto_duration"),
-        FieldPanel("tuto_date"),
-        FieldPanel("tuto_image"),
+        MultiFieldPanel(
+            [
+                FieldPanel("tuto_title"),
+                FieldPanel("tuto_subtitle"),
+                FieldPanel("tuto_learner_type"),
+                FieldPanel("tuto_duration"),
+                FieldPanel("tuto_date"),
+                FieldPanel("tuto_image"),
+            ],
+            heading="Banner Options",
+        ),
         FieldPanel("content"),
     ]
     # Indicate this is article-style content.

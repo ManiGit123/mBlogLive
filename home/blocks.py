@@ -66,6 +66,17 @@ class CarouselBlock(blocks.StructBlock):
 class AccordionBlock(blocks.StructBlock):
     # cards with image text and buttons by ListBlock
     title = blocks.CharBlock(required=True, help_text="Add your title")
+    accordion_type = blocks.ChoiceBlock(
+        required=True,
+        max_length=50,
+        choices=[
+            ("option1", "Question and Answer"),
+            ("option2", "Informations"),
+        ],
+        default="option1",
+        null=True,
+        blank=False,
+    )
     accordions = blocks.ListBlock(
         blocks.StructBlock(
             [
