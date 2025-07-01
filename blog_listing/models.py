@@ -5,6 +5,7 @@ from home import blocks
 from home.models import FinancialBLog, TravelBLog, TutorialsBLog
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
 from django.db import models
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your models here.
 
@@ -26,7 +27,22 @@ class FinancialBlogListingPage(Page):
     def get_context(self, request, *args, **kwargs):
         # Adding custom stuff to our contaxt
         contaxt = super().get_context(request, *args, **kwargs)
-        contaxt["posts"] = FinancialBLog.objects.live().public()
+
+        # Get all blog posts ordered by date
+        blog_posts = FinancialBLog.objects.live().public()
+
+        # Pagination
+        page = request.GET.get("page")
+        paginator = Paginator(blog_posts, 10)  # Show 10 posts per page
+
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+
+        contaxt["posts"] = posts
         return contaxt
 
 
@@ -47,7 +63,21 @@ class TravelBlogListingPage(Page):
     def get_context(self, request, *args, **kwargs):
         # Adding custom stuff to our contaxt
         contaxt = super().get_context(request, *args, **kwargs)
-        contaxt["posts"] = TravelBLog.objects.live().public()
+        # Get all blog posts ordered by date
+        blog_posts = TravelBLog.objects.live().public()
+
+        # Pagination
+        page = request.GET.get("page")
+        paginator = Paginator(blog_posts, 10)  # Show 10 posts per page
+
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+
+        contaxt["posts"] = posts
         return contaxt
 
 
@@ -68,7 +98,21 @@ class TutorialsBlogListingPage(Page):
     def get_context(self, request, *args, **kwargs):
         # Adding custom stuff to our contaxt
         contaxt = super().get_context(request, *args, **kwargs)
-        contaxt["posts"] = TutorialsBLog.objects.live().public()
+        # Get all blog posts ordered by date
+        blog_posts = TutorialsBLog.objects.live().public()
+
+        # Pagination
+        page = request.GET.get("page")
+        paginator = Paginator(blog_posts, 10)  # Show 10 posts per page
+
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+
+        contaxt["posts"] = posts
         return contaxt
 
 

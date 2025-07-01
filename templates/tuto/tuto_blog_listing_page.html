@@ -51,6 +51,68 @@
             {% endfor %}
         </div>
     </div>
+    <div class="container-cus">
+        <div
+            class="flex flex-col md:flex-row items-center justify-between border-t border-gray-300 dark:border-gray-600 px-4 py-3">
+            {# Results count - left side #}
+            <div class="mb-3 sm:mb-0">
+                <p class="text-sm text-gray-700 dark:text-gray-300">
+                    Showing
+                    <span class="font-medium">{{ posts.start_index }}</span>
+                    to
+                    <span class="font-medium">{{ posts.end_index }}</span>
+                    of
+                    <span class="font-medium">{{ posts.paginator.count }}</span>
+                    results
+                </p>
+            </div>
+
+            {# Pagination - right side #}
+            <div class="flex items-center space-x-1">
+                {# Previous button #}
+                {% if posts.has_previous %}
+                <a href="?page={{ posts.previous_page_number }}"
+                    class="px-3 py-1 rounded-md border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
+                    Previous
+                </a>
+                {% else %}
+                <span
+                    class="px-3 py-1 rounded-md border border-gray-300 dark:border-gray-600 text-gray-400 dark:text-gray-500 cursor-not-allowed">
+                    Previous
+                </span>
+                {% endif %}
+
+                {# Page numbers - hidden on small screens #}
+                <div class="hidden sm:flex space-x-1">
+                    {% for page_num in posts.paginator.page_range %}
+                    {% if page_num == posts.number %}
+                    <span class="px-3 py-1 rounded-md bg-indigo-600 text-white">
+                        {{ page_num }}
+                    </span>
+                    {% else %}
+                    <a href="?page={{ page_num }}"
+                        class="px-3 py-1 rounded-md border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
+                        {{ page_num }}
+                    </a>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+
+                {# Next button #}
+                {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}"
+                    class="px-3 py-1 rounded-md border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
+                    Next
+                </a>
+                {% else %}
+                <span
+                    class="px-3 py-1 rounded-md border border-gray-300 dark:border-gray-600 text-gray-400 dark:text-gray-500 cursor-not-allowed">
+                    Next
+                </span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </main>
 {% endblock %}
 
