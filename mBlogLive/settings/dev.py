@@ -10,7 +10,6 @@ elif renderUsername == "manirender":
     print(
         "debug is False -----------",
         "render environ read success",
-        os.environ.get("USERNAME"),
     )
     DEBUG = False
 else:

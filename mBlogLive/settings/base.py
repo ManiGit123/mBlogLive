@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.sitemaps",
+    "wagtail.contrib.table_block",
     "wagtail.embeds",
     "wagtailseo",  # Wagtail - seo
     "wagtail.contrib.settings",  # Wagtail - seo

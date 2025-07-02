@@ -6,6 +6,7 @@ from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
 from wagtailcodeblock.blocks import CodeBlock
 from wagtailseo.models import SeoMixin, SeoType, TwitterCard
 from wagtail.embeds.blocks import EmbedBlock
+from wagtail.contrib.table_block.blocks import TableBlock
 
 # from modelcluster.fields import ParentalKey
 
@@ -61,6 +62,7 @@ class FinancialBLog(SeoMixin, Page):
             ("embedded", EmbedBlock()),
             ("date_picker", blocks.DatePickerBlock()),
             ("button_link", blocks.ButtonLinkBlock()),
+            ("table", TableBlock()),
         ],
         blank=True,
         null=True,
@@ -119,6 +121,7 @@ class TravelBLog(SeoMixin, Page):
             ("embedded", EmbedBlock()),
             ("date_picker", blocks.DatePickerBlock()),
             ("button_link", blocks.ButtonLinkBlock()),
+            ("table", TableBlock()),
         ],
         blank=True,
         null=True,
@@ -189,6 +192,7 @@ class TutorialsBLog(SeoMixin, Page):
             ("embedded", EmbedBlock()),
             ("date_picker", blocks.DatePickerBlock()),
             ("button_link", blocks.ButtonLinkBlock()),
+            ("table", TableBlock()),
         ],
         blank=True,
         null=True,
