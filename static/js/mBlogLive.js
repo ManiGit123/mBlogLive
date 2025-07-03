@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================================================================
     // Simple carousel functionality
     const slides = document.querySelector('.flex.transition-transform');
-    const slideCount = document.querySelectorAll('.min-w-full').length;
+    const slideCount = document.querySelectorAll('.carousal-count').length;   //min-w-full
     let currentIndex = 0;
 
     function goToSlide(index) {

@@ -36,6 +36,10 @@
         <div class="container-cus">
             {% include_block block with block_id=block.id %}
         </div>
+        {% elif block.block_type == 'table' %}
+        <div class="container-cus">
+            {% include "blocks/table_block.html" %}
+        </div>
         {% else %}
         <div class="container-cus">
             {% include_block block %}
