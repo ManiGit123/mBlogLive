@@ -66,6 +66,7 @@ class FinancialBLog(SeoMixin, Page):
         ],
         blank=True,
         null=True,
+        collapsed=True,
     )
 
     content_panels = Page.content_panels + [
@@ -78,8 +79,15 @@ class FinancialBLog(SeoMixin, Page):
                 FieldPanel("fin_date"),
             ],
             heading="Banner Options",
+            classname="collapsible collapsed",
         ),
-        FieldPanel("content"),
+        MultiFieldPanel(
+            [
+                FieldPanel("content"),
+            ],
+            heading="Stream Options",
+            classname="collapsible collapsed",
+        ),
     ]
     # Indicate this is article-style content.
     seo_content_type = SeoType.ARTICLE
@@ -125,6 +133,7 @@ class TravelBLog(SeoMixin, Page):
         ],
         blank=True,
         null=True,
+        collapsed=True,
     )
 
     content_panels = Page.content_panels + [
@@ -137,8 +146,15 @@ class TravelBLog(SeoMixin, Page):
                 FieldPanel("travel_image"),
             ],
             heading="Banner Options",
+            classname="collapsible collapsed",
         ),
-        FieldPanel("content"),
+        MultiFieldPanel(
+            [
+                FieldPanel("content"),
+            ],
+            heading="Stream Options",
+            classname="collapsible collapsed",
+        ),
     ]
     # Indicate this is article-style content.
     seo_content_type = SeoType.ARTICLE
@@ -196,6 +212,7 @@ class TutorialsBLog(SeoMixin, Page):
         ],
         blank=True,
         null=True,
+        collapsed=True,
     )
 
     content_panels = Page.content_panels + [
@@ -209,8 +226,15 @@ class TutorialsBLog(SeoMixin, Page):
                 FieldPanel("tuto_image"),
             ],
             heading="Banner Options",
+            classname="collapsible collapsed",
         ),
-        FieldPanel("content"),
+        MultiFieldPanel(
+            [
+                FieldPanel("content"),
+            ],
+            heading="Stream Options",
+            classname="collapsible collapsed",
+        ),
     ]
     # Indicate this is article-style content.
     seo_content_type = SeoType.ARTICLE
