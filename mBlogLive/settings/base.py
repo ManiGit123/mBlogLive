@@ -41,6 +41,8 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 SITE_ID = 1
 
+WAGTAILADMIN_BASE_URL = "https://www.maptomoney.in"
+
 INSTALLED_APPS = [
     "home",
     "blog_listing",
