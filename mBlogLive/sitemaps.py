@@ -41,7 +41,7 @@ from django.urls import reverse
 
 
 class CombinedSitemap(Sitemap):
-    changefreq = "weekly"
+    changefreq = "daily"
     priority = 0.5
     protocol = "https"
 
