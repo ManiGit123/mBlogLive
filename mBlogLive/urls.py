@@ -22,7 +22,7 @@ urlpatterns = [
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
-    path("", include("blog_listing.urls")),
+    path("", include("blog_listing.urls", namespace="blog_listing")),
     path("api/", include("api.urls")),
 ]
 

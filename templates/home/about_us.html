@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+
+{% block content %}
+<main class="flex-grow pt-16 p-4 bg-white dark:bg-gray-900">
+    <section class="bg-white dark:bg-gray-900 py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white sm:text-5xl">
+                    About Our Platform
+                </h1>
+                <p class="mt-4 text-xl text-gray-600 dark:text-gray-300">
+                    Empowering your journey through knowledge and tools
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">Our Story</h2>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                        Founded in 2025, we started as a small team passionate about sharing valuable information
+                        across diverse domains. What began as a simple blog has grown into a comprehensive platform
+                        offering travel insights, financial guidance, practical tutorials, and powerful tools to help
+                        our readers navigate these areas with confidence.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">Our Mission</h2>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                        We believe knowledge should be accessible, practical, and actionable. Our mission is to:
+                    </p>
+                    <ul class="mt-4 space-y-3 text-gray-600 dark:text-gray-400 list-disc pl-6">
+                        <li>Demystify complex topics in travel and finance</li>
+                        <li>Provide high-quality, well-researched tutorials</li>
+                        <li>Develop tools that solve real problems</li>
+                        <li>Help our community make informed decisions</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">What We Offer</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+                            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">Travel Resources
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-400">
+                                From destination guides to budgeting tips, we help you explore the world smarter.
+                            </p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+                            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">Financial Wisdom
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-400">
+                                Practical advice to help you manage, grow, and protect your finances.
+                            </p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+                            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">Tutorials</h3>
+                            <p class="text-gray-600 dark:text-gray-400">
+                                Step-by-step guides to help you master new skills and technologies.
+                            </p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+                            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">Practical Tools</h3>
+                            <p class="text-gray-600 dark:text-gray-400">
+                                Calculators, planners, and utilities to simplify your travel and financial planning.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">Our Team</h2>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                        We're a diverse group of travel enthusiasts, finance experts, and tech professionals united by
+                        our passion for sharing knowledge. Our team brings together decades of combined experience
+                        across these fields to create content and tools you can trust.
+                    </p>
+                </div>
+
+                <div class="pt-8 border-t border-gray-200 dark:border-gray-700">
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">Join Our Community</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">
+                        We're more than just a website - we're building a community of curious, forward-thinking
+                        individuals.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="{% url 'blog_listing:contact_us' %}"
+                            class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg text-center transition-colors">
+                            Contact Us
+                        </a>
+                        <a href="/#blog"
+                            class="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 font-medium rounded-lg text-center transition-colors">
+                            Explore Our Blog
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

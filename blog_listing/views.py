@@ -10,11 +10,10 @@ from django.views.generic import DetailView
 from .models import MyImage
 
 
-def hoempage(request):
+def homepage(request):
     travel = TravelBLog.objects.live().public()
     fin = FinancialBLog.objects.live().public()
     tuto = TutorialsBLog.objects.live().public()
-    print(type(travel), travel)
     context = {
         "travel": travel[len(travel) - 1],
         "fin": fin[len(fin) - 1],
@@ -25,6 +24,14 @@ def hoempage(request):
 
 def test(request):
     return render(request, template_name="home/test.html")
+
+
+def AboutUs(request):
+    return render(request, template_name="home/about_us.html")
+
+
+def ContactUs(request):
+    return render(request, template_name="home/contact_us.html")
 
 
 @staff_member_required
