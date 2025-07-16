@@ -28,10 +28,12 @@
             <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Quick Links</h3>
             <ul class="space-y-2">
                 <li><a href="{% url 'blog_listing:about_us' %}" class="hover:underline">About Us</a></li>
-                <li><a href="{% url 'blog_listing:contact_us' %}" class="hover:underline">Contact</a></li>
-                <li><a href="#" class="hover:underline">Privacy Policy</a></li>
-                <li><a href="#" class="hover:underline">Terms of Service</a></li>
-                <li><a href="#" class="hover:underline">Write for Us</a></li>
+                <li><a href="{% url 'blog_listing:contact_us' %}" class="hover:underline">Contact Us</a></li>
+                <li><a href="{% url 'blog_listing:privacy_policy' %}" class="hover:underline">Privacy Policy</a></li>
+                <li><a href="{% url 'blog_listing:terms_of_service' %}" class="hover:underline">Terms of Service</a>
+                </li>
+                <li><a href="/write-for-us" id="writeForUsLink" class="hover:underline">Write
+                        for Us</a></li>
             </ul>
         </div>
 
@@ -71,3 +73,165 @@
         &copy; 2025 maptomoney.in. All rights reserved.
     </div>
 </footer>
+
+<!-- Write for Us Modal -->
+<div id="writeForUsModal"
+    class="fixed inset-0 bg-black bg-opacity-500 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200">Write for Us</h2>
+                <button id="closeModal" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <form id="writerApplicationForm" class="space-y-6"
+                action="{% url 'blog_listing:submit_writer_application' %}" method="POST">
+                {% csrf_token %}
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Full
+                        Name</label>
+                    <input type="text" id="name" name="name"
+                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-200"
+                        required>
+                </div>
+
+                <div>
+                    <label for="email"
+                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+                    <input type="email" id="email" name="email"
+                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-200"
+                        required>
+                </div>
+
+                <div>
+                    <label for="topic" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Topic
+                        Category</label>
+                    <select id="topic" name="topic"
+                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-200">
+                        <option value="travel">Travel Guides</option>
+                        <option value="finance">Finance & Budgeting</option>
+                        <option value="technology">Tech Tutorials</option>
+                        <option value="remote-work">Remote Work</option>
+                        <option value="lifestyle">Lifestyle</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="article_idea"
+                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Article Idea</label>
+                    <input type="text" id="article-idea" name="article_idea"
+                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-200"
+                        placeholder="Briefly describe your article idea" required>
+                </div>
+
+                <div>
+                    <label for="writing_experience"
+                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Your
+                        Writing Experience</label>
+                    <textarea id="experience" name="writing_experience" rows="2"
+                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-200"
+                        placeholder="Tell us about your writing background and expertise"></textarea>
+                </div>
+
+                <div class="hidden">
+                    <label for="writing_samples"
+                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Writing
+                        Samples (Links)</label>
+                    <textarea id="samples" name="writing_samples" rows="2"
+                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-200"
+                        placeholder="Paste links to your published work (if any)"></textarea>
+                </div>
+
+                <div>
+                    <button type="submit"
+                        class="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">
+                        Submit Application
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Get modal elements
+    const modal = document.getElementById('writeForUsModal');
+    const openModalLink = document.getElementById('writeForUsLink');
+    const closeModalButton = document.getElementById('closeModal');
+    const form = document.getElementById('writerApplicationForm');
+
+    // Open modal when "Write for Us" is clicked
+    openModalLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+    });
+
+    // Close modal when X button is clicked
+    closeModalButton.addEventListener('click', function () {
+        modal.classList.add('hidden');
+        document.body.style.overflow = ''; // Restore scrolling
+    });
+
+    // Close modal when clicking outside the modal content
+    modal.addEventListener('click', function (e) {
+        if (e.target === modal) {
+            modal.classList.add('hidden');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+            modal.classList.add('hidden');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+    });
+
+    // Handle form submission
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': form.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert(data.message);
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                    form.reset();
+                } else {
+                    if (data.errors) {
+                        let errorMessages = [];
+                        for (const field in data.errors) {
+                            errorMessages.push(data.errors[field][0]);
+                        }
+                        alert('Please fix these errors:\n\n' + errorMessages.join('\n'));
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                }
+            })
+            .catch(error => {
+                alert('An error occurred. Please try again.');
+                console.error('Error:', error);
+            });
+    });
+</script>

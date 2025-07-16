@@ -8,6 +8,11 @@ from django.http import HttpResponse
 from home.models import FinancialBLog, TravelBLog, TutorialsBLog
 from django.views.generic import DetailView
 from .models import MyImage
+import json
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from .forms import WriterApplicationForm
+from django.views.decorators.csrf import csrf_exempt
 
 
 def homepage(request):
@@ -22,16 +27,57 @@ def homepage(request):
     return render(request, template_name="home/landing_page.html", context=context)
 
 
-def test(request):
-    return render(request, template_name="home/test.html")
-
-
 def AboutUs(request):
     return render(request, template_name="home/about_us.html")
 
 
 def ContactUs(request):
     return render(request, template_name="home/contact_us.html")
+
+
+def PrivacyPolicy(request):
+    return render(request, template_name="home/privacy_policy.html")
+
+
+def TermsofService(request):
+    return render(request, template_name="home/terms_of_service.html")
+
+
+@require_POST
+def submit_writer_application(request):
+    try:
+        # For debugging - print raw POST data
+        # print("Raw POST data:", request.POST)
+
+        form = WriterApplicationForm(request.POST)
+        if form.is_valid():
+            application = form.save()
+            return JsonResponse(
+                {
+                    "status": "success",
+                    "message": "Application submitted successfully!",
+                    "id": application.id,
+                }
+            )
+        else:
+            print("Form errors:", form.errors.as_json())
+            return JsonResponse(
+                {
+                    "status": "error",
+                    "message": "Please correct the errors below.",
+                    "errors": json.loads(form.errors.as_json()),
+                },
+                status=400,
+            )
+    except Exception as e:
+        print("Server error:", str(e))
+        return JsonResponse(
+            {"status": "error", "message": "Server error: " + str(e)}, status=500
+        )
+
+
+def test(request):
+    return render(request, template_name="home/test.html")
 
 
 @staff_member_required
