@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import FileResponse, HttpResponse
 import os
 from django.conf import settings
@@ -13,6 +13,8 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from .forms import WriterApplicationForm
 from django.views.decorators.csrf import csrf_exempt
+from .forms import ContactForm
+from django.contrib import messages
 
 
 def homepage(request):
@@ -32,7 +34,18 @@ def AboutUs(request):
 
 
 def ContactUs(request):
-    return render(request, template_name="home/contact_us.html")
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request, "Thank you for contacting us! We will get back to you soon."
+            )
+            return redirect("blog_listing:contact_us")
+    else:
+        form = ContactForm()
+
+    return render(request, template_name="home/contact_us.html", context={"form": form})
 
 
 def PrivacyPolicy(request):

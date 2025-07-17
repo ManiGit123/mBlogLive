@@ -8,6 +8,7 @@ from django.db import models
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db import models
 from django.core.validators import URLValidator
+from wagtail.snippets.models import register_snippet
 
 # Create your models here.
 
@@ -130,6 +131,27 @@ TOPIC_CHOICES = [
     ("lifestyle", "Lifestyle"),
     ("other", "Other"),
 ]
+
+
+class ContactSubmission(models.Model):
+    SUBJECT_CHOICES = [
+        ("general", "General Inquiry"),
+        ("travel", "Travel Blog"),
+        ("finance", "Finance Content"),
+        ("tutorials", "Tutorials"),
+        ("tools", "Tools Feedback"),
+        ("other", "Other"),
+    ]
+
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=20, choices=SUBJECT_CHOICES)
+    message = models.TextField()
+    submitted_at = models.DateTimeField(auto_now_add=True)
+    reviewed = models.BooleanField(default=False, verbose_name="Reviewed?")
+
+    def __str__(self):
+        return f"{self.name} - {self.subject} ({self.submitted_at})"
 
 
 class WriterApplication(models.Model):
