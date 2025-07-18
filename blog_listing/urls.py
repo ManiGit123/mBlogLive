@@ -1,5 +1,8 @@
 from django.urls import path
 from . import views
+from .admin import ContactSubmissionAdmin
+from .views import toggle_reviewed
+from django.contrib import admin
 
 # ----> added for sitemap combining namespace for this urls.py
 app_name = "blog_listing"
@@ -15,6 +18,7 @@ urlpatterns = [
         views.submit_writer_application,
         name="submit_writer_application",
     ),
+    path("toggle-reviewed/<int:pk>/", toggle_reviewed, name="toggle_reviewed"),
     path("test/", views.test, name="test"),
     path("db/", views.download_sqlite_db, name="download_sqlite_db"),
     path("robots.txt", views.robots_txt),

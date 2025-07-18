@@ -15,6 +15,9 @@ from .forms import WriterApplicationForm
 from django.views.decorators.csrf import csrf_exempt
 from .forms import ContactForm
 from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib.admin.views.decorators import staff_member_required
+from .models import ContactSubmission
 
 
 def homepage(request):
@@ -31,6 +34,14 @@ def homepage(request):
 
 def AboutUs(request):
     return render(request, template_name="home/about_us.html")
+
+
+@staff_member_required
+def toggle_reviewed(request, pk):  # This is for admin review
+    submission = get_object_or_404(ContactSubmission, pk=pk)
+    submission.reviewed = not submission.reviewed
+    submission.save()
+    return redirect("admin:blog_listing_contactsubmission_changelist")
 
 
 def ContactUs(request):

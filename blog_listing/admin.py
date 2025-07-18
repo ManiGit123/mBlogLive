@@ -2,10 +2,12 @@ from django.contrib import admin
 from .models import MyImage, ContactSubmission, WriterApplication
 from django.utils.html import format_html
 from django.urls import reverse
+from django.urls import path
+from django.shortcuts import get_object_or_404, redirect
 
 
 class ContactSubmissionAdmin(admin.ModelAdmin):
-    list_display = ("name", "email", "subject", "submitted_at", "reviewed")
+    list_display = ("name", "subject", "message", "submitted_at", "reviewed_status")
     list_filter = ("reviewed", "subject", "submitted_at")
     search_fields = ("name", "email", "message")
     readonly_fields = ("name", "email", "subject", "message", "submitted_at")
@@ -25,17 +27,36 @@ class ContactSubmissionAdmin(admin.ModelAdmin):
         # Default ordering - newest first
         return super().get_queryset(request).order_by("-submitted_at")
 
+    def reviewed_status(self, obj):
+        url = reverse("blog_listing:toggle_reviewed", args=[obj.pk])
+        if obj.reviewed:
+            return format_html('<a href="{}" style="color: green;">✓ Reviewed</a>', url)
+        return format_html('<a href="{}" style="color: red;">✗ Not Reviewed</a>', url)
+
+    reviewed_status.short_description = "Status"
+    reviewed_status.allow_tags = True
+
+
+class ReviewedFilter(admin.SimpleListFilter):
+    title = "review status"
+    parameter_name = "is_reviewed"
+
+    def lookups(self, request, model_admin):
+        return (
+            ("reviewed", "Reviewed"),
+            ("unreviewed", "Unreviewed"),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == "reviewed":
+            return queryset.filter(is_reviewed=True)
+        if self.value() == "unreviewed":
+            return queryset.filter(is_reviewed=False)
+
 
 class WriterApplicationAdmin(admin.ModelAdmin):
-    list_display = (
-        "name",
-        "email",
-        "topic",
-        "article_idea",
-        "submitted_at",
-        "is_reviewed",
-    )
-    list_filter = ("is_reviewed", "topic", "submitted_at")
+    list_display = ("name", "topic", "article_idea", "submitted_at", "is_reviewed")
+    list_filter = (ReviewedFilter, "topic", "submitted_at")
     search_fields = ("name", "email", "article_idea", "writing_experience")
     readonly_fields = (
         "name",
