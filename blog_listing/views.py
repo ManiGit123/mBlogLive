@@ -18,18 +18,61 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.admin.views.decorators import staff_member_required
 from .models import ContactSubmission
+from .forms import NewsletterForm
+from .models import NewsletterSubscriber
 
 
 def homepage(request):
     travel = TravelBLog.objects.live().public()
     fin = FinancialBLog.objects.live().public()
     tuto = TutorialsBLog.objects.live().public()
+
+    # Landing page form handling
+    if request.method == "POST" and "landing_form" in request.POST:
+        form = NewsletterForm(request.POST)
+        # print(f"Form is valid: {form.is_valid()}")  # Debug line
+        # print(f"Form errors: {form.errors}")  # Debug line
+        if form.is_valid():
+            subscriber = form.save(commit=False)
+            subscriber.source = "landing"
+            subscriber.save()
+            messages.success(
+                request, "Thank you for subscribing!", extra_tags="landing_form"
+            )
+            return redirect("blog_listing:home_page")
+        else:
+            # Pass form errors to messages
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{error}", extra_tags="landing_form")
+    else:
+        form = NewsletterForm()
+
     context = {
         "travel": travel[len(travel) - 1],
         "fin": fin[len(fin) - 1],
         "tuto": tuto[len(tuto) - 1],
+        "landing_form": form,
     }
-    return render(request, template_name="home/landing_page.html", context=context)
+    return render(request, "home/landing_page.html", context)
+
+
+def footer_subscribe(request):
+    if request.method == "POST":
+        # print("footer POST data:", request.POST)
+        form = NewsletterForm(request.POST)
+        if form.is_valid():
+            subscriber = form.save(commit=False)
+            subscriber.source = "footer"
+            subscriber.save()
+            messages.success(
+                request, "Thank you for subscribing!", extra_tags="footer_form"
+            )
+        else:
+            for error in form.errors.get("email", []):
+                messages.error(request, error, extra_tags="footer_form")
+            # messages.error(request, "Please enter a valid email address")
+        return redirect(request.META.get("HTTP_REFERER", "home"))
 
 
 def AboutUs(request):
@@ -50,9 +93,14 @@ def ContactUs(request):
         if form.is_valid():
             form.save()
             messages.success(
-                request, "Thank you for contacting us! We will get back to you soon."
+                request,
+                "Thank you for contacting us! We will get back to you soon.",
+                extra_tags="contact_form",
             )
             return redirect("blog_listing:contact_us")
+        else:
+            for error in form.errors.get("email", []):
+                messages.error(request, error, extra_tags="contact_form")
     else:
         form = ContactForm()
 

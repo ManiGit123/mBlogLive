@@ -97,11 +97,25 @@ Welcome to M2M!
             <h2 class="text-3xl md:text-4xl font-bold mb-8 text-gray-800 dark:text-gray-100">Ready to Start Your
                 Journey?
             </h2>
-            <p class="text-lg text-gray-700 dark:text-gray-300 mb-12 max-w-3xl mx-auto">
+            <p class="text-lg text-gray-700 dark:text-gray-300 mb-2 max-w-3xl mx-auto">
                 Join our community of lifelong learners and adventurers. Get the latest insights directly in your inbox.
             </p>
-            <form class="max-w-xl mx-auto flex flex-col md:flex-row gap-4">
-                <input type="email" placeholder="Enter your email"
+            {% if messages %}
+            {% for message in messages %}
+            {% if 'landing_form' in message.extra_tags %}
+            <div
+                class="close-subscriber mx-120 px-4 py-2 rounded shadow-lg {% if 'error' in message.tags %}bg-red-100 text-red-800{% else %}bg-green-100 text-green-800{% endif %} mb-2">
+                {{ message }}
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
+            <form method="post" class="mt-4 max-w-xl mx-auto flex flex-col md:flex-row gap-4"
+                onsubmit="saveScrollPosition()">
+                {% csrf_token %}
+                <input type="hidden" name="landing_form" value="1">
+                <input type="email" name="email" placeholder="Enter your email"
                     class="flex-grow px-5 py-3 rounded-full border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
                     required>
                 <button type="submit"
@@ -109,6 +123,7 @@ Welcome to M2M!
                     Subscribe Now
                 </button>
             </form>
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
                 {% image travel.travel_image fill-300x200 as img %}
                 <div

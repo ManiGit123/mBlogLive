@@ -176,3 +176,15 @@ class WriterApplication(models.Model):
         ordering = ["-submitted_at"]
         verbose_name = "Writer Application"
         verbose_name_plural = "Writer Applications"
+
+
+class NewsletterSubscriber(models.Model):
+    email = models.EmailField(unique=True)
+    subscribed_at = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
+    source = models.CharField(
+        max_length=20, choices=[("landing", "Landing Page"), ("footer", "Footer")]
+    )
+
+    def __str__(self):
+        return self.email

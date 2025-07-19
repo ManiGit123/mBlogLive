@@ -9,6 +9,7 @@ app_name = "blog_listing"
 
 urlpatterns = [
     path("", views.homepage, name="home_page"),
+    path("subscribe/", views.footer_subscribe, name="footer_subscribe"),
     path("about-us/", views.AboutUs, name="about_us"),
     path("contact-us/", views.ContactUs, name="contact_us"),
     path("privacy-policy/", views.PrivacyPolicy, name="privacy_policy"),

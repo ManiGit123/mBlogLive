@@ -1,6 +1,8 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from .models import WriterApplication
 from .models import ContactSubmission
+from .models import NewsletterSubscriber
 
 
 class ContactForm(forms.ModelForm):
@@ -53,3 +55,20 @@ class WriterApplicationForm(forms.ModelForm):
         self.fields["article_idea"].widget.attrs.update({"id": "article-idea"})
         self.fields["writing_experience"].widget.attrs.update({"id": "experience"})
         self.fields["writing_samples"].widget.attrs.update({"id": "samples"})
+
+
+class NewsletterForm(forms.ModelForm):
+    class Meta:
+        model = NewsletterSubscriber
+        fields = ["email"]
+        widgets = {
+            "email": forms.EmailInput(
+                attrs={"class": "form-control", "placeholder": "Enter your email"}
+            )
+        }
+
+    def clean_email(self):
+        email = self.cleaned_data["email"]
+        if NewsletterSubscriber.objects.filter(email=email).exists():
+            raise ValidationError("This email is already subscribed!")
+        return email
