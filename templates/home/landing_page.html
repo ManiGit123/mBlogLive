@@ -104,7 +104,7 @@ Welcome to M2M!
             {% for message in messages %}
             {% if 'landing_form' in message.extra_tags %}
             <div
-                class="close-subscriber mx-120 px-4 py-2 rounded shadow-lg {% if 'error' in message.tags %}bg-red-100 text-red-800{% else %}bg-green-100 text-green-800{% endif %} mb-2">
+                class="close-subscriber px-4 py-2 rounded shadow-lg {% if 'error' in message.tags %}bg-red-100 text-red-800{% else %}bg-green-100 text-green-800{% endif %} mb-2 inline-block">
                 {{ message }}
             </div>
             {% endif %}

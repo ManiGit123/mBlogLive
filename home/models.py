@@ -330,6 +330,9 @@ class NewsArticle(SeoMixin, Page):
     # Change the Twitter card style.
     seo_twitter_card = TwitterCard.LARGE
 
+    # Add Open Graph settings
+    seo_og_type = "article"  # Explicitly set OG type
+
     promote_panels = SeoMixin.seo_panels
 
     class Meta:

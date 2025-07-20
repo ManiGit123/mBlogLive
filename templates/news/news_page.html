@@ -24,9 +24,28 @@
                     <span class="mr-5 flex items-center text-purple-600 dark:text-purple-400"><i
                             class="fas fa-brain mr-1"></i>{{ self.get_news_categories_display }}</span>
                     {%endif %}
-                    <span class="flex items-center mr-5"><i
-                            class="fas fa-clock mr-1"></i>{{self.news_author.name}}</span>
                     <span class="flex items-center"><i class="fas fa-calendar-check mr-1"></i>{{self.news_date}}</span>
+                </div>
+                <!-- In your article template (article_page.html) -->
+                <div class="social-sharing mx-auto">
+                    <span>Share:</span>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.full_url }}" target="_blank"
+                        rel="noopener noreferrer">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url={{ page.full_url }}&text={{ page.title }}"
+                        target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.full_url }}&title={{ page.title }}"
+                        target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <!-- Add more platforms as needed -->
+                </div>
+
+                <div>
+                    <a href="/" class="flex items-center mr-5 underline">author: {{self.news_author.name}}</a>
                 </div>
             </div>
             <div class="dark:text-gray-300 mt-4">
@@ -59,4 +78,28 @@
         {% endfor %}
     </article>
 </main>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const shareBtn = document.getElementById('native-share');
+
+        if (shareBtn) {
+            shareBtn.addEventListener('click', async () => {
+                try {
+                    await navigator.share({
+                        title: '{{ page.title }}',
+                        text: 'Check out this article: {{ page.title }}',
+                        url: '{{ page.full_url }}',
+                    });
+                } catch (err) {
+                    console.log('Error sharing:', err);
+                }
+            });
+
+            // Only show the native share button if the API is supported
+            if (navigator.share) {
+                shareBtn.style.display = 'inline-block';
+            }
+        }
+    });
+</script>
 {% endblock %}

@@ -109,7 +109,7 @@
                     <div class="mb-6">
                         {% for message in messages %}
                         {% if 'contact_form' in message.extra_tags %}
-                        <div class="close-contact p-4 mb-4 text-sm {% if 'error' in message.tags %}bg-red-100 text-red-800{% else %}bg-green-100 text-green-800{% endif %} rounded-lg dark:bg-green-200 dark:text-green-800"
+                        <div class="close-contact p-4 mb-4 text-sm {% if 'error' in message.tags %}bg-red-100 text-red-800{% else %}bg-green-100 text-green-800{% endif %} rounded-lg"
                             role="alert">
                             {{ message }}
                         </div>

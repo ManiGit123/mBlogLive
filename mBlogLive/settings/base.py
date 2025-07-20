@@ -326,3 +326,7 @@ WAGTAIL_CODE_BLOCK_LANGUAGES = (
     ("scss", "SCSS"),
     ("yaml", "YAML"),
 )
+
+# # wagtail seo
+# WAGTAILSEO_DEFAULT_IMAGE = "images/default-social.jpg"
+# WAGTAILSEO_DEFAULT_TWITTER_CARD = "summary_large_image"

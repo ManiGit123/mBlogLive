@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import MyImage, ContactSubmission, WriterApplication
+from .models import MyImage, ContactSubmission, WriterApplication, NewsletterSubscriber
 from django.utils.html import format_html
 from django.urls import reverse
 from django.urls import path
@@ -84,7 +84,30 @@ class WriterApplicationAdmin(admin.ModelAdmin):
         return super().get_queryset(request).order_by("-submitted_at")
 
 
+class SubscriberAdmin(admin.ModelAdmin):
+    list_display = ("email", "subscribed_at", "is_active", "source")
+    list_filter = ("source", "subscribed_at", "is_active")
+    search_fields = ("email", "source")
+    readonly_fields = ("email", "subscribed_at", "is_active", "source")
+    # actions = ["mark_as_reviewed", "mark_as_unreviewed"]
+
+    # def mark_as_reviewed(self, request, queryset):
+    #     queryset.update(is_reviewed=True)
+
+    # mark_as_reviewed.short_description = "Mark selected submissions as reviewed"
+
+    # def mark_as_unreviewed(self, request, queryset):
+    #     queryset.update(is_reviewed=False)
+
+    # mark_as_unreviewed.short_description = "Mark selected submissions as not reviewed"
+
+    def get_queryset(self, request):
+        # Default ordering - newest first
+        return super().get_queryset(request).order_by("-subscribed_at")
+
+
 # Register your models here.
 admin.site.register(MyImage)
 admin.site.register(ContactSubmission, ContactSubmissionAdmin)
 admin.site.register(WriterApplication, WriterApplicationAdmin)
+admin.site.register(NewsletterSubscriber, SubscriberAdmin)
