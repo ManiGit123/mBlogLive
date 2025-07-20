@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+{% block content %}
+<main class="flex-grow pt-16 p-4 bg-white dark:bg-gray-900">
+    <div class="container-cus">
+        <h2 class="text-2xl md:text-3xl font-extrabold text-gray-800 dark:text-white mb-6">All News</h2>
+        <div class="grid grid-cols-1 gap-6">
+            {% for post in posts %}
+            {% image post.news_image fill-300x200 as img %}
+            <a href="{{post.url}}"
+                class="flex bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl hover:ring-2 hover:ring-blue-500 hover:ring-opacity-50 transition-all duration-300 overflow-hidden transform md:hover:-translate-y-1">
+                {% if img %}
+                <img src="{{img.url}}" alt="{{img.alt}}"
+                    class="w-38 h-auto md:w-48 object-cover flex-shrink-0 hidden md:block">
+                {% else %}
+                <img src="{% static 'image/No image.png' %}" alt="No image to preview"
+                    class="w-38 h-auto md:w-48 object-cover flex-shrink-0 hidden md:block">
+                {% endif %}
+                <div class="p-4 flex flex-col justify-between flex-grow">
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-2 line-clamp-2">
+                            {{post.news_title}}</h2>
+                        <div class="text-gray-600 dark:text-gray-300 text-sm line-clamp-3 mb-4">
+                            {{post.news_subtitle|richtext}}
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between text-gray-500 dark:text-gray-400 text-xs">
+                        <div class="flex items-center">
+                            {% if post.news_categories == "option1" %}
+                            <span class="mr-3 flex items-center text-green-600 dark:text-green-400"><i
+                                    class="fas fa-seedling mr-1"></i>{{ post.get_news_categories_display }}</span>
+                            {% elif post.news_categories == "option2" %}
+                            <span class="mr-3 flex items-center text-yellow-600 dark:text-yellow-400"><i
+                                    class="fas fa-star mr-1"></i>{{ post.get_news_categories_display }}</span>
+                            {% elif post.news_categories == "option3" %}
+                            <span class="mr-3 flex items-center text-red-600 dark:text-red-400"><i
+                                    class="fas fa-fire mr-1"></i>{{ post.get_news_categories_display }}</span>
+                            {% elif post.news_categories == "option4" %}
+                            <span class="mr-3 flex items-center text-purple-600 dark:text-purple-400"><i
+                                    class="fas fa-brain mr-1"></i>{{ post.get_news_categories_display }}</span>
+                            {% else %}
+                            <span class="mr-5 flex items-center text-purple-600 dark:text-purple-400"><i
+                                    class="fas fa-brain mr-1"></i>{{ post.get_news_categories_display }}</span>
+                            {%endif %}
+                            <!-- <span class="flex items-center mr-3"><i
+                                    class="fas fa-clock mr-1"></i>{{post.tuto_duration}}</span> -->
+                            <span class="flex items-center"><i
+                                    class="fas fa-calendar-check mr-1"></i>{{post.news_date}}</span>
+                        </div>
+                        <span class="font-medium text-blue-500 dark:text-blue-400">Read More &rarr;</span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container-cus">
+        <div
+            class="flex flex-col md:flex-row items-center justify-between border-t border-gray-300 dark:border-gray-600 px-4 py-3">
+            {# Results count - left side #}
+            <div class="mb-3 sm:mb-0">
+                <p class="text-sm text-gray-700 dark:text-gray-300">
+                    Showing
+                    <span class="font-medium">{{ posts.start_index }}</span>
+                    to
+                    <span class="font-medium">{{ posts.end_index }}</span>
+                    of
+                    <span class="font-medium">{{ posts.paginator.count }}</span>
+                    results
+                </p>
+            </div>
+
+            {# Pagination - right side #}
+            <div class="flex items-center space-x-1">
+                {# Previous button #}
+                {% if posts.has_previous %}
+                <a href="?page={{ posts.previous_page_number }}"
+                    class="px-3 py-1 rounded-md border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
+                    Previous
+                </a>
+                {% else %}
+                <span
+                    class="px-3 py-1 rounded-md border border-gray-300 dark:border-gray-600 text-gray-400 dark:text-gray-500 cursor-not-allowed">
+                    Previous
+                </span>
+                {% endif %}
+
+                {# Page numbers - hidden on small screens #}
+                <div class="hidden sm:flex space-x-1">
+                    {% for page_num in posts.paginator.page_range %}
+                    {% if page_num == posts.number %}
+                    <span class="px-3 py-1 rounded-md bg-indigo-600 text-white">
+                        {{ page_num }}
+                    </span>
+                    {% else %}
+                    <a href="?page={{ page_num }}"
+                        class="px-3 py-1 rounded-md border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
+                        {{ page_num }}
+                    </a>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+
+                {# Next button #}
+                {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}"
+                    class="px-3 py-1 rounded-md border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
+                    Next
+                </a>
+                {% else %}
+                <span
+                    class="px-3 py-1 rounded-md border border-gray-300 dark:border-gray-600 text-gray-400 dark:text-gray-500 cursor-not-allowed">
+                    Next
+                </span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

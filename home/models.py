@@ -13,7 +13,7 @@ from wagtail.contrib.table_block.blocks import TableBlock
 
 class HomePage(SeoMixin, Page):
     template = "home/home_page.html"
-    # max_count = 1  # restrict child
+    max_count = 1  # restrict child
     banner_title = models.CharField(max_length=300, blank=False, null=True)
     banner_subtitle = RichTextField(blank=True)
 
@@ -247,3 +247,91 @@ class TutorialsBLog(SeoMixin, Page):
     class Meta:
         verbose_name = "Tutorial Blog"
         verbose_name_plural = "Tutorial Blogs"
+
+
+class NewsArticle(SeoMixin, Page):
+    template = "news/news_page.html"
+    news_title = models.CharField(max_length=300, blank=False, null=True)
+    news_subtitle = RichTextField(blank=True)
+    news_categories = models.CharField(
+        max_length=50,
+        choices=[
+            ("option1", "Business"),
+            ("option2", "Technology"),
+            ("option3", "Science"),
+            ("option4", "Health"),
+            ("option5", "Sports"),
+            ("option6", "Entertainment"),
+        ],
+        default="option1",
+        null=True,
+        blank=False,
+    )
+    news_date = models.DateField("Post date", blank=False, null=True)
+    news_author = models.ForeignKey(
+        "blog_listing.NewsAuthor",  # Reference the snippet
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="posts",
+    )
+    news_image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+    content = StreamField(
+        [
+            ("title_and_text", blocks.TitleandTexBlock()),
+            ("rich_text", blocks.RichTextBlock()),
+            ("simple_rich_text", blocks.SimpleRichTextBlock()),  # way 2
+            ("card", blocks.CardBlock()),
+            ("carousel", blocks.CarouselBlock()),
+            ("accordion", blocks.AccordionBlock()),
+            ("cta", blocks.CTABlock()),
+            ("cuscodeblock", blocks.CustomCodeBlock()),
+            ("codeblock", CodeBlock(label="Code block", classname="container")),
+            ("embedded", EmbedBlock()),
+            ("date_picker", blocks.DatePickerBlock()),
+            ("button_link", blocks.ButtonLinkBlock()),
+            ("table", TableBlock()),
+        ],
+        blank=True,
+        null=True,
+        collapsed=True,
+    )
+
+    content_panels = Page.content_panels + [
+        MultiFieldPanel(
+            [
+                FieldPanel("news_title"),
+                FieldPanel("news_subtitle"),
+                FieldPanel("news_categories"),
+                FieldPanel("news_date"),
+                FieldPanel("news_author"),
+                FieldPanel("news_image"),
+            ],
+            heading="Banner Options",
+            classname="collapsible collapsed",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("content"),
+            ],
+            heading="Stream Options",
+            classname="collapsible collapsed",
+        ),
+    ]
+    # Indicate this is article-style content.
+    seo_content_type = SeoType.ARTICLE
+
+    # Change the Twitter card style.
+    seo_twitter_card = TwitterCard.LARGE
+
+    promote_panels = SeoMixin.seo_panels
+
+    class Meta:
+        verbose_name = "News Article"
+        verbose_name_plural = "News Articles"

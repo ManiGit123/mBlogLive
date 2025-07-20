@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailembeds_tags wagtailimages_tags static %}
+
+{% block content %}
+<main class="flex-grow pt-16 p-4 bg-white dark:bg-gray-900">
+    <article>
+        <div class="container-cus">
+            <h1>{{self.news_title}}</h1>
+            <div class="flex items-center text-gray-500 dark:text-gray-400 text-xs md:text-xl">
+                <div class="flex items-center">
+                    {% if self.news_categories == "option1" %}
+                    <span class="mr-5 flex items-center text-green-600 dark:text-green-400"><i
+                            class="fas fa-seedling mr-1"></i>{{ self.get_news_categories_display }}</span>
+                    {% elif self.news_categories == "option2" %}
+                    <span class="mr-5 flex items-center text-yellow-600 dark:text-yellow-400"><i
+                            class="fas fa-star mr-1"></i>{{ self.get_news_categories_display }}</span>
+                    {% elif self.news_categories == "option3" %}
+                    <span class="mr-5 flex items-center text-red-600 dark:text-red-400"><i
+                            class="fas fa-fire mr-1"></i>{{ self.get_news_categories_display }}</span>
+                    {% elif self.news_categories == "option4" %}
+                    <span class="mr-5 flex items-center text-purple-600 dark:text-purple-400"><i
+                            class="fas fa-brain mr-1"></i>{{ self.get_news_categories_display }}</span>
+                    {% else %}
+                    <span class="mr-5 flex items-center text-purple-600 dark:text-purple-400"><i
+                            class="fas fa-brain mr-1"></i>{{ self.get_news_categories_display }}</span>
+                    {%endif %}
+                    <span class="flex items-center mr-5"><i
+                            class="fas fa-clock mr-1"></i>{{self.news_author.name}}</span>
+                    <span class="flex items-center"><i class="fas fa-calendar-check mr-1"></i>{{self.news_date}}</span>
+                </div>
+            </div>
+            <div class="dark:text-gray-300 mt-4">
+                {{self.news_subtitle|richtext}}
+            </div>
+            {% image self.news_image fill-900x400 as img %}
+            {% if img %}
+            <img src="{{img.url}}" alt="{{img.alt}}" class="w-auto h-auto object-cover flex-shrink-0 mt-4">
+            {% endif %}
+        </div>
+
+        {% for block in page.content %}
+        {% if block.block_type == 'embeded' %}
+        <div class="container-cus">
+            {% include_block block %}
+        </div>
+        {% elif block.block_type == 'cuscodeblock' %}
+        <div class="container-cus">
+            {% include_block block with block_id=block.id %}
+        </div>
+        {% elif block.block_type == 'table' %}
+        <div class="container-cus">
+            {% include "blocks/table_block.html" %}
+        </div>
+        {% else %}
+        <div class="container-cus">
+            {% include_block block %}
+        </div>
+        {% endif %}
+        {% endfor %}
+    </article>
+</main>
+{% endblock %}
