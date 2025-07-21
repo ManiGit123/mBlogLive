@@ -249,20 +249,24 @@ class TutorialsBLog(SeoMixin, Page):
         verbose_name_plural = "Tutorial Blogs"
 
 
+news_cat_choices = [
+    ("option1", "Business"),
+    ("option2", "Technology"),
+    ("option3", "Science"),
+    ("option4", "Health"),
+    ("option5", "Sports"),
+    ("option6", "Entertainment"),
+]
+
+
 class NewsArticle(SeoMixin, Page):
+
     template = "news/news_page.html"
     news_title = models.CharField(max_length=300, blank=False, null=True)
     news_subtitle = RichTextField(blank=True)
     news_categories = models.CharField(
         max_length=50,
-        choices=[
-            ("option1", "Business"),
-            ("option2", "Technology"),
-            ("option3", "Science"),
-            ("option4", "Health"),
-            ("option5", "Sports"),
-            ("option6", "Entertainment"),
-        ],
+        choices=news_cat_choices,
         default="option1",
         null=True,
         blank=False,

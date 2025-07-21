@@ -2,119 +2,160 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 {% block content %}
 <main class="flex-grow pt-16 p-4 bg-white dark:bg-gray-900">
-    <div class="container-cus">
-        <h2 class="text-2xl md:text-3xl font-extrabold text-gray-800 dark:text-white mb-6">All News</h2>
-        <div class="grid grid-cols-1 gap-6">
-            {% for post in posts %}
-            {% image post.news_image fill-300x200 as img %}
-            <a href="{{post.url}}"
-                class="flex bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl hover:ring-2 hover:ring-blue-500 hover:ring-opacity-50 transition-all duration-300 overflow-hidden transform md:hover:-translate-y-1">
-                {% if img %}
-                <img src="{{img.url}}" alt="{{img.alt}}"
-                    class="w-38 h-auto md:w-48 object-cover flex-shrink-0 hidden md:block">
-                {% else %}
-                <img src="{% static 'image/No image.png' %}" alt="No image to preview"
-                    class="w-38 h-auto md:w-48 object-cover flex-shrink-0 hidden md:block">
-                {% endif %}
-                <div class="p-4 flex flex-col justify-between flex-grow">
-                    <div>
-                        <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-2 line-clamp-2">
-                            {{post.news_title}}</h2>
-                        <div class="text-gray-600 dark:text-gray-300 text-sm line-clamp-3 mb-4">
-                            {{post.news_subtitle|richtext}}
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-between text-gray-500 dark:text-gray-400 text-xs">
-                        <div class="flex items-center">
-                            {% if post.news_categories == "option1" %}
-                            <span class="mr-3 flex items-center text-green-600 dark:text-green-400"><i
-                                    class="fas fa-seedling mr-1"></i>{{ post.get_news_categories_display }}</span>
-                            {% elif post.news_categories == "option2" %}
-                            <span class="mr-3 flex items-center text-yellow-600 dark:text-yellow-400"><i
-                                    class="fas fa-star mr-1"></i>{{ post.get_news_categories_display }}</span>
-                            {% elif post.news_categories == "option3" %}
-                            <span class="mr-3 flex items-center text-red-600 dark:text-red-400"><i
-                                    class="fas fa-fire mr-1"></i>{{ post.get_news_categories_display }}</span>
-                            {% elif post.news_categories == "option4" %}
-                            <span class="mr-3 flex items-center text-purple-600 dark:text-purple-400"><i
-                                    class="fas fa-brain mr-1"></i>{{ post.get_news_categories_display }}</span>
-                            {% else %}
-                            <span class="mr-5 flex items-center text-purple-600 dark:text-purple-400"><i
-                                    class="fas fa-brain mr-1"></i>{{ post.get_news_categories_display }}</span>
-                            {%endif %}
-                            <!-- <span class="flex items-center mr-3"><i
-                                    class="fas fa-clock mr-1"></i>{{post.tuto_duration}}</span> -->
-                            <span class="flex items-center"><i
-                                    class="fas fa-calendar-check mr-1"></i>{{post.news_date}}</span>
-                        </div>
-                        <span class="font-medium text-blue-500 dark:text-blue-400">Read More &rarr;</span>
-                    </div>
-                </div>
-            </a>
+    <div class="lg:hidden fixed-top-filter bg-gray-100 dark:bg-gray-800 shadow-md mt-15 py-5 px-4">
+        <div class="flex flex-wrap justify-center gap-3">
+            <button class="category-tab bg-blue-600 text-white px-3 py-1 rounded-full hover:bg-blue-700 active"
+                data-category="all">All</button>
+            {% for option, choice in choices %}
+            <button
+                class="category-tab bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600"
+                data-category="{{option}}">{{choice}}</button>
             {% endfor %}
         </div>
     </div>
-    <div class="container-cus">
-        <div
-            class="flex flex-col md:flex-row items-center justify-between border-t border-gray-300 dark:border-gray-600 px-4 py-3">
-            {# Results count - left side #}
-            <div class="mb-3 sm:mb-0">
-                <p class="text-sm text-gray-700 dark:text-gray-300">
-                    Showing
-                    <span class="font-medium">{{ posts.start_index }}</span>
-                    to
-                    <span class="font-medium">{{ posts.end_index }}</span>
-                    of
-                    <span class="font-medium">{{ posts.paginator.count }}</span>
-                    results
-                </p>
-            </div>
 
-            {# Pagination - right side #}
-            <div class="flex items-center space-x-1">
-                {# Previous button #}
-                {% if posts.has_previous %}
-                <a href="?page={{ posts.previous_page_number }}"
-                    class="px-3 py-1 rounded-md border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
-                    Previous
-                </a>
-                {% else %}
-                <span
-                    class="px-3 py-1 rounded-md border border-gray-300 dark:border-gray-600 text-gray-400 dark:text-gray-500 cursor-not-allowed">
-                    Previous
-                </span>
-                {% endif %}
+    <div class="container-cus mx-auto px-4 py-10 news-content-area">
+        <h1 class="text-4xl font-extrabold text-center mb-10">All News</h1>
 
-                {# Page numbers - hidden on small screens #}
-                <div class="hidden sm:flex space-x-1">
-                    {% for page_num in posts.paginator.page_range %}
-                    {% if page_num == posts.number %}
-                    <span class="px-3 py-1 rounded-md bg-indigo-600 text-white">
-                        {{ page_num }}
-                    </span>
-                    {% else %}
-                    <a href="?page={{ page_num }}"
-                        class="px-3 py-1 rounded-md border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
-                        {{ page_num }}
-                    </a>
-                    {% endif %}
+        <div class="grid lg:grid-cols-4 gap-6">
+            <aside class="hidden lg:block space-y-3">
+                <h2 class="text-xl font-semibold mb-2">Categories</h2>
+                <ul class="space-y-2">
+                    <li><button
+                            class="category-tab w-full text-left px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 active"
+                            data-category="all">All</button></li>
+                    {% for option, choice in choices %}
+                    <li><button
+                            class="category-tab w-full text-left px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600"
+                            data-category="{{option}}">{{choice}}</button></li>
                     {% endfor %}
-                </div>
+                </ul>
+            </aside>
 
-                {# Next button #}
-                {% if posts.has_next %}
-                <a href="?page={{ posts.next_page_number }}"
-                    class="px-3 py-1 rounded-md border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
-                    Next
-                </a>
-                {% else %}
-                <span
-                    class="px-3 py-1 rounded-md border border-gray-300 dark:border-gray-600 text-gray-400 dark:text-gray-500 cursor-not-allowed">
-                    Next
-                </span>
-                {% endif %}
+            <div id="news-container" class="mt-10 lg:col-span-3 grid sm:grid-cols-2 xl:grid-cols-2 gap-6">
+                {% for post in posts %}
+                {% image post.news_image fill-300x200 as img %}
+                <div
+                    class="news-card category-{{post.news_categories}} bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-xl transition duration-300 overflow-hidden cursor-pointer flex h-32">
+                    {% if img %}
+                    <img src="{{img.url}}" alt="{{img.alt}}" class="w-1/3 h-full object-cover" />
+                    {% else %}
+                    <img src="{% static 'image/No image.png' %}" class="w-1/3 h-full object-cover" alt="Tech" />
+                    {% endif %}
+                    <div
+                        class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-200 w-2/3 flex flex-col justify-center">
+                        <h5 class="text-md font-semibold underline line-clamp-3">{{post.news_title}}</h3>
+                            <div class="flex items-center justify-between text-gray-500 dark:text-gray-400 text-xs">
+                                <div class="flex items-center">
+                                    {% if post.news_categories == "option1" %}
+                                    <span class="mr-3 flex items-center text-green-600 dark:text-green-400"><i
+                                            class="fas fa-seedling mr-1"></i>{{post.get_news_categories_display}}</span>
+                                    {% elif post.news_categories == "option2" %}
+                                    <span class="mr-3 flex items-center text-yellow-600 dark:text-yellow-400"><i
+                                            class="fas fa-star mr-1"></i>{{post.get_news_categories_display}}</span>
+                                    {% elif post.news_categories == "option3" %}
+                                    <span class="mr-3 flex items-center text-red-600 dark:text-red-400"><i
+                                            class="fas fa-fire mr-1"></i>{{post.get_news_categories_display}}</span>
+                                    {% elif post.news_categories == "option4" %}
+                                    <span class="mr-3 flex items-center text-purple-600 dark:text-purple-400"><i
+                                            class="fas fa-brain mr-1"></i>{{post.get_news_categories_display}}</span>
+                                    {% else %}
+                                    <span class="mr-5 flex items-center text-purple-600 dark:text-purple-400"><i
+                                            class="fas fa-brain mr-1"></i>{{post.get_news_categories_display}}</span>
+                                    {%endif %}
+                                    <span class="flex items-center"><i
+                                            class="fas fa-calendar-check mr-1"></i>{{post.news_date}}</span>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
+    <style>
+        /* Custom CSS for fixed top filter on small/medium screens */
+        @media (max-width: 1023px) {
+
+            /* Applies to screens smaller than 'lg' breakpoint */
+            .fixed-top-filter {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                z-index: 10;
+                overflow-x: auto;
+                /* Enable horizontal scrolling for categories */
+                white-space: nowrap;
+                /* Prevent categories from wrapping */
+                -webkit-overflow-scrolling: touch;
+                /* Smooth scrolling on iOS */
+            }
+
+            /* Add padding to the body to prevent content from being hidden behind the fixed header */
+            body {
+                padding-top: 70px;
+                /* Adjust this value based on the height of your fixed header */
+            }
+
+            /* Adjust the top margin of the main content to avoid overlap */
+            .news-content-area {
+                margin-top: 20px;
+                /* Further adjust if needed to give some space below the fixed filter */
+            }
+        }
+
+        /* Hide scrollbar for a cleaner look, but keep functionality */
+        .fixed-top-filter::-webkit-scrollbar {
+            display: none;
+        }
+
+        .fixed-top-filter {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+    </style>
+
+    <script>
+        const tabs = document.querySelectorAll('.category-tab');
+        const cards = document.querySelectorAll('.news-card');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active state from all tabs (both top and sidebar)
+                document.querySelectorAll('.category-tab').forEach(t => {
+                    t.classList.remove('bg-blue-600', 'text-white');
+                    t.classList.add('bg-gray-200', 'dark:bg-gray-700'); // Re-add default background
+                    t.classList.remove('hover:bg-blue-700'); // Remove hover blue
+                    t.classList.add('hover:bg-gray-300', 'dark:hover:bg-gray-600'); // Re-add default hover
+                });
+
+                // Add active state to the clicked tab (handles both top and sidebar simultaneously)
+                const category = tab.getAttribute('data-category');
+                document.querySelectorAll(`.category-tab[data-category="${category}"]`).forEach(t => {
+                    t.classList.add('bg-blue-600', 'text-white');
+                    t.classList.remove('bg-gray-200', 'dark:bg-gray-700'); // Remove default background
+                    t.classList.add('hover:bg-blue-700'); // Add hover blue
+                    t.classList.remove('hover:bg-gray-300', 'dark:hover:bg-gray-600'); // Remove default hover
+                });
+
+                cards.forEach(card => {
+                    if (category === 'all' || card.classList.contains(`category-${category}`)) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Initialize: Set "All" as active on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.category-tab[data-category="all"]').click();
+        });
+    </script>
+
 </main>
 {% endblock %}

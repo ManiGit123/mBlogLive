@@ -9,6 +9,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db import models
 from django.core.validators import URLValidator
 from wagtail.snippets.models import register_snippet
+from home.models import news_cat_choices
 
 # Create your models here.
 
@@ -163,6 +164,7 @@ class NewsArticleListingPage(Page):
             posts = paginator.page(paginator.num_pages)
 
         contaxt["posts"] = posts
+        contaxt["choices"] = news_cat_choices
         return contaxt
 
 

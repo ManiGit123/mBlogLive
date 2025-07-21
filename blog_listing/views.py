@@ -119,10 +119,12 @@ def TermsofService(request):
 def submit_writer_application(request):
     try:
         # For debugging - print raw POST data
-        # print("Raw POST data:", request.POST)
+        print("Raw POST data:", request.POST)
 
         form = WriterApplicationForm(request.POST)
         if form.is_valid():
+            print(f"Form is valid: {form.is_valid()}")  # Debug line
+            print(f"Form errors: {form.errors}")  # Debug line
             application = form.save()
             return JsonResponse(
                 {
