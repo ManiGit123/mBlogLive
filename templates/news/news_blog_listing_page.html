@@ -15,7 +15,7 @@
     </div>
 
     <div class="container-cus mx-auto px-4 py-10 news-content-area">
-        <h1 class="text-4xl font-extrabold text-center mb-10">All News</h1>
+        <h1 class="text-4xl font-extrabold text-center mb-10 mt-4">All News</h1>
 
         <div class="grid lg:grid-cols-4 gap-6">
             <aside class="hidden lg:block space-y-3">
@@ -32,10 +32,10 @@
                 </ul>
             </aside>
 
-            <div id="news-container" class="mt-10 lg:col-span-3 grid sm:grid-cols-2 xl:grid-cols-2 gap-6">
+            <div id="news-container" class="lg:mt-10 lg:col-span-3 grid sm:grid-cols-2 xl:grid-cols-2 gap-6">
                 {% for post in posts %}
                 {% image post.news_image fill-300x200 as img %}
-                <div
+                <a href="{{post.url}}"
                     class="news-card category-{{post.news_categories}} bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-xl transition duration-300 overflow-hidden cursor-pointer flex h-32">
                     {% if img %}
                     <img src="{{img.url}}" alt="{{img.alt}}" class="w-1/3 h-full object-cover" />
@@ -68,7 +68,7 @@
                                 </div>
                             </div>
                     </div>
-                </div>
+                </a>
                 {% endfor %}
             </div>
         </div>

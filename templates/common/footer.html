@@ -107,7 +107,8 @@
                 </button>
             </div>
 
-            <form id="writerApplicationForm" class="space-y-6" method="POST">
+            <form id="writerApplicationForm" action="{% url 'blog_listing:submit_writer_application' %}"
+                class="space-y-6" method="POST">
                 {% csrf_token %}
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Full
