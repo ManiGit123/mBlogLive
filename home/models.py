@@ -7,6 +7,7 @@ from wagtailcodeblock.blocks import CodeBlock
 from wagtailseo.models import SeoMixin, SeoType, TwitterCard
 from wagtail.embeds.blocks import EmbedBlock
 from wagtail.contrib.table_block.blocks import TableBlock
+from .data import news_cat_data, news_cat_choices, financial_type, tutorial_learner_type
 
 # from modelcluster.fields import ParentalKey
 
@@ -30,12 +31,7 @@ class FinancialBLog(SeoMixin, Page):
     fin_subtitle = RichTextField(blank=False, null=True)
     fin_type = models.CharField(
         max_length=50,
-        choices=[
-            ("option1", "Personal Finance"),
-            ("option2", "Investments"),
-            ("option3", "Retirement"),
-            ("option4", "Debt"),
-        ],
+        choices=financial_type,
         default="option1",
         null=True,
         blank=False,
@@ -175,12 +171,7 @@ class TutorialsBLog(SeoMixin, Page):
     tuto_subtitle = RichTextField(blank=True)
     tuto_learner_type = models.CharField(
         max_length=50,
-        choices=[
-            ("option1", "Beginner"),
-            ("option2", "Intermediate"),
-            ("option3", "Advanced"),
-            ("option4", "Expert"),
-        ],
+        choices=tutorial_learner_type,
         default="option1",
         null=True,
         blank=False,
@@ -247,16 +238,6 @@ class TutorialsBLog(SeoMixin, Page):
     class Meta:
         verbose_name = "Tutorial Blog"
         verbose_name_plural = "Tutorial Blogs"
-
-
-news_cat_choices = [
-    ("option1", "Business"),
-    ("option2", "Technology"),
-    ("option3", "Science"),
-    ("option4", "Health"),
-    ("option5", "Sports"),
-    ("option6", "Entertainment"),
-]
 
 
 class NewsArticle(SeoMixin, Page):
@@ -338,6 +319,12 @@ class NewsArticle(SeoMixin, Page):
     seo_og_type = "article"  # Explicitly set OG type
 
     promote_panels = SeoMixin.seo_panels
+
+    def get_context(self, request, *args, **kwargs):
+        # Adding custom stuff to our contaxt
+        contaxt = super().get_context(request, *args, **kwargs)
+        contaxt["cat_datas"] = news_cat_data
+        return contaxt
 
     class Meta:
         verbose_name = "News Article"

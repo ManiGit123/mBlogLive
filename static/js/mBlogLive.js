@@ -149,28 +149,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Next slide
-    document.querySelector('.absolute.right-4').addEventListener('click', () => {
+    const next = document.querySelector('.absolute.right-4')
+    next?.addEventListener('click', () => {
         currentIndex = (currentIndex + 1) % slideCount;
         goToSlide(currentIndex);
     });
 
     // Previous slide
-    document.querySelector('.absolute.left-4').addEventListener('click', () => {
+    const previous = document.querySelector('.absolute.left-4')
+    previous?.addEventListener('click', () => {
         currentIndex = (currentIndex - 1 + slideCount) % slideCount;
         goToSlide(currentIndex);
     });
 
     // Indicators
-    document.querySelectorAll('.absolute.bottom-4 button').forEach((btn, i) => {
+    const indicators = document.querySelectorAll('.absolute.bottom-4 button')
+    indicators?.forEach((btn, i) => {
         btn.addEventListener('click', () => goToSlide(i));
     });
 
     // Auto-advance (optional)
-    setInterval(() => {
-        currentIndex = (currentIndex + 1) % slideCount;
-        goToSlide(currentIndex);
-    }, 6000);
-
+    if (slideCount > 1) {
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % slideCount;
+            goToSlide(currentIndex);
+        }, 6000);
+    }
     // ========================== accordion js =====================================
     // =============================================================================
     document.querySelectorAll('.accordion-toggle').forEach(button => {
@@ -321,6 +325,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 3000); // Display "Downloaded!" for 2 seconds
             }
         }
+    });
+
+    // ========================== Social media share js =====================================
+    // =====================================================================================
+    // Get all share buttons on the page
+    const shareButtons = document.querySelectorAll('[id^="shareIcon-"]');
+
+    shareButtons.forEach(shareButton => {
+        // Extract the ID number from the button ID
+        const elementId = shareButton.id.split('-')[1];
+        const socialIconsPopup = document.getElementById(`socialIconsPopup-${elementId}`);
+
+        if (socialIconsPopup) {
+            shareButton.addEventListener('click', function (e) {
+                e.stopPropagation(); // Prevent immediate document click handler
+                console.log(`Social clicked for element ${elementId}`);
+                socialIconsPopup.classList.toggle('show');
+            });
+        }
+    });
+
+    // Close any open popups when clicking outside
+    document.addEventListener('click', function (event) {
+        const allPopups = document.querySelectorAll('.social-icons-popup.show');
+        allPopups.forEach(popup => {
+            const elementId = popup.id.split('-')[1];
+            const shareButton = document.getElementById(`shareIcon-${elementId}`);
+
+            if (!popup.contains(event.target) && (!shareButton || !shareButton.contains(event.target))) {
+                popup.classList.remove('show');
+            }
+        });
     });
 
 });

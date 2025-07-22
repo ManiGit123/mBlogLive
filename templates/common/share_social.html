@@ -1,0 +1,27 @@
+<div class="social-sharing-container mx-auto">
+    <button id="shareIcon-{{ element_id }}" class="share-icon-button">
+        <i class="fas fa-share-alt"></i>
+    </button>
+
+    <div id="socialIconsPopup-{{ element_id }}" class="social-icons-popup">
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.full_url }}" target="_blank"
+            rel="noopener noreferrer">
+            <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://twitter.com/intent/tweet?url={{ page.full_url }}&text={{ page.title }}" target="_blank"
+            rel="noopener noreferrer">
+            <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.full_url }}&title={{ page.title }}"
+            target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="mailto:?subject={{ page.title }}&body={{ page.full_url }}" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://api.whatsapp.com/send?text={{ page.title }}%20{{ page.full_url }}" target="_blank"
+            rel="noopener noreferrer">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+</div>

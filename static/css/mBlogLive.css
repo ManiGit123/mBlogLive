@@ -109,5 +109,134 @@ body {
 }
 
 /* ========================================================================= */
-/* Table css */
-/* Basic table styling */
+/* share social media icons */
+.social-sharing-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin: 20px auto; */
+}
+
+/* #007bff */
+.share-icon-button {
+    background-color: transparent;
+    color: green;
+    /* padding: 10px; */
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.share-icon-button:hover {
+    color: #0056b3;
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+/* Light mode styles */
+.social-icons-popup {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    z-index: 1000;
+    white-space: nowrap;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.social-icons-popup a {
+    color: #4b5563;
+    font-size: 24px;
+    transition: color 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 640px) {
+    .social-icons-popup {
+        left: auto;
+        right: 0;
+        transform: translateX(0);
+    }
+
+    /* Optional: If you want it to appear above the share icon instead */
+    /* .social-icons-popup {
+        top: auto;
+        bottom: calc(100% + 10px);
+        left: 0;
+        right: auto;
+        transform: translateX(0);
+    } */
+}
+
+/* Dark mode styles */
+.dark .social-icons-popup,
+.dark-mode .social-icons-popup,
+[data-theme="dark"] .social-icons-popup {
+    background-color: #1f2937;
+    border-color: #374151;
+    border-width: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.dark .social-icons-popup a,
+.dark-mode .social-icons-popup a,
+[data-theme="dark"] .social-icons-popup a {
+    color: #d1d5db;
+}
+
+.social-icons-popup.show {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Hover effects (same for both modes) */
+.social-icons-popup a .fa-facebook:hover {
+    color: #3b5998;
+    transform: scale(1.1);
+}
+
+.social-icons-popup a .fa-twitter:hover {
+    color: #1da1f2;
+    transform: scale(1.1);
+}
+
+.social-icons-popup a .fa-linkedin:hover {
+    color: #0077b5;
+    transform: scale(1.1);
+}
+
+.social-icons-popup a .fa-envelope:hover {
+    color: #c71610;
+    transform: scale(1.1);
+}
+
+.social-icons-popup a .fa-whatsapp:hover {
+    color: #25d366;
+    transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
