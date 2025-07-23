@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "home",
     "blog_listing",
     "api",
+    "tools",
     "search",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",

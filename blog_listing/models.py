@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from wagtail.models import Page, Orderable
 from wagtail.fields import RichTextField, StreamField
 from home import blocks
@@ -175,9 +176,13 @@ class NewsAuthor(models.Model):
     avatar = models.ForeignKey(
         "wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL
     )
+    slug = models.SlugField(max_length=200, unique=True, default="other")
 
     def __str__(self):
         return self.name  # Important for admin dropdowns!
+
+    def get_absolute_url(self):
+        return reverse("blog_listing:author_detail", args=[self.slug])
 
     class Meta:
         verbose_name = "News Author"

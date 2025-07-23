@@ -20,6 +20,7 @@ urlpatterns = [
         name="submit_writer_application",
     ),
     path("toggle-reviewed/<int:pk>/", toggle_reviewed, name="toggle_reviewed"),
+    path("author/<slug:slug>/", views.author_detail, name="author_detail"),
     path("test/", views.test, name="test"),
     path("db/", views.download_sqlite_db, name="download_sqlite_db"),
     path("robots.txt", views.robots_txt),

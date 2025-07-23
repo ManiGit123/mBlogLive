@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404, redirect
 class ContactSubmissionAdmin(admin.ModelAdmin):
     list_display = ("name", "subject", "message", "submitted_at", "reviewed_status")
     list_filter = ("reviewed", "subject", "submitted_at")
+    list_filter_horizontal = ("reviewed", "subject", "submitted_at")
     search_fields = ("name", "email", "message")
     readonly_fields = ("name", "email", "subject", "message", "submitted_at")
     actions = ["mark_as_reviewed", "mark_as_unreviewed"]
@@ -35,6 +36,15 @@ class ContactSubmissionAdmin(admin.ModelAdmin):
 
     reviewed_status.short_description = "Status"
     reviewed_status.allow_tags = True
+
+    def changelist_view(self, request, extra_context=None):
+        # Add any extra context if needed
+        extra_context = extra_context or {}
+        extra_context["title"] = "Custom Title"  # Optional
+        return super().changelist_view(request, extra_context=extra_context)
+
+    class Media:
+        css = {"all": ("css/admin-custom.css",)}
 
 
 class ReviewedFilter(admin.SimpleListFilter):
@@ -82,6 +92,15 @@ class WriterApplicationAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         # Default ordering - newest first
         return super().get_queryset(request).order_by("-submitted_at")
+
+    def changelist_view(self, request, extra_context=None):
+        # Add any extra context if needed
+        extra_context = extra_context or {}
+        extra_context["title"] = "Custom Title"  # Optional
+        return super().changelist_view(request, extra_context=extra_context)
+
+    class Media:
+        css = {"all": ("css/admin-custom.css",)}
 
 
 class SubscriberAdmin(admin.ModelAdmin):

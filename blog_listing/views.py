@@ -19,7 +19,8 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib.admin.views.decorators import staff_member_required
 from .models import ContactSubmission
 from .forms import NewsletterForm
-from .models import NewsletterSubscriber
+from .models import NewsletterSubscriber, NewsAuthor
+from home.models import NewsArticle
 
 
 def homepage(request):
@@ -152,6 +153,24 @@ def submit_writer_application(request):
 
 def test(request):
     return render(request, template_name="home/test.html")
+
+
+def author_detail(request, slug):
+    author = get_object_or_404(NewsAuthor, slug=slug)
+    articles = (
+        NewsArticle.objects.live()
+        .filter(news_author=author)
+        .order_by("-first_published_at")
+    )
+
+    return render(
+        request,
+        "news/author_detail.html",
+        {
+            "author": author,
+            "articles": articles,
+        },
+    )
 
 
 @staff_member_required

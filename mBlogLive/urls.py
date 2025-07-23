@@ -24,6 +24,7 @@ urlpatterns = [
     path("search/", search_views.search, name="search"),
     path("", include("blog_listing.urls", namespace="blog_listing")),
     path("api/", include("api.urls")),
+    path("tools/", include("tools.urls")),
 ]
 
 
@@ -44,12 +45,3 @@ urlpatterns = urlpatterns + [
     # of your site, rather than the site root:
     #    path("pages/", include(wagtail_urls)),
 ]
-
-
-# path("sitemap.xml", wagtail_sitemap),
-# path(
-#     "sitemap.xml",
-#     djsitemap,
-#     {"sitemaps": sitemaps},
-#     name="django.contrib.sitemaps.views.sitemap",
-# ),

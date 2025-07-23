@@ -1,0 +1,122 @@
+{% extends "admin/change_list.html" %}
+{% load admin_list i18n %}
+
+{% block extrahead %}
+{{ block.super }}
+<style>
+    /* Horizontal filter styling */
+    .top-filters-container {
+        background: var(--body-bg);
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid var(--hairline-color);
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .top-filters-container h2 {
+        margin: 0 0 15px 0;
+        font-size: 14px;
+        font-weight: 600;
+        float: left;
+        line-height: 24px;
+    }
+
+    .top-filters {
+        margin-left: 120px;
+    }
+
+    .filter-group {
+        display: inline-block;
+        margin-right: 30px;
+        vertical-align: top;
+        margin-bottom: 10px;
+    }
+
+    .filter-group h3 {
+        margin: 0 0 5px 0;
+        font-size: 12px;
+        font-weight: 400;
+        color: var(--body-quiet-color);
+    }
+
+    .filter-content {
+        display: inline-block;
+    }
+
+    .filter-content ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    .filter-content li {
+        list-style-type: none;
+        display: inline-block;
+        margin-right: 5px;
+        margin-bottom: 5px;
+    }
+
+    .filter-content a {
+        display: inline-block;
+        padding: 3px 8px;
+        border-radius: 3px;
+        background: var(--darkened-bg);
+        color: var(--body-fg);
+        font-size: 12px;
+    }
+
+    .filter-content a:hover {
+        background: var(--primary);
+        color: white;
+        text-decoration: none;
+    }
+
+    .filter-content a.selected {
+        background: var(--primary);
+        color: white;
+        font-weight: 600;
+    }
+
+    .selected a {
+        background-color: green;
+        color: white;
+        font-weight: 600;
+    }
+
+    .clear-filters {
+        display: inline-block;
+        margin-left: 15px;
+        font-size: 12px;
+        line-height: 24px;
+    }
+
+    /* Hide the original sidebar filters */
+    #changelist-filter {
+        display: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Custom horizontal filters at top -->
+{% if cl.has_filters %}
+<div class="top-filters-container">
+    <h2>{% translate 'Filter' %}</h2>
+    {% if cl.has_active_filters %}
+    <a href="?{% if cl.is_popup %}_popup=1{% endif %}" class="clear-filters">{% translate 'Clear all filters' %}</a>
+    {% endif %}
+    <div class="top-filters">
+        {% for spec in cl.filter_specs %}
+        <div class="filter-group">
+            <h3>{{ spec.title|capfirst }}</h3>
+            <div class="filter-content">
+                {% admin_list_filter cl spec %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{{ block.super }}
+{% endblock %}
