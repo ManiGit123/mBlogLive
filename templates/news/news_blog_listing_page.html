@@ -47,22 +47,12 @@
                         <h5 class="text-md font-semibold underline line-clamp-3">{{post.news_title}}</h3>
                             <div class="flex items-center justify-between text-gray-500 dark:text-gray-400 text-xs">
                                 <div class="flex items-center">
-                                    {% if post.news_categories == "option1" %}
-                                    <span class="mr-3 flex items-center text-green-600 dark:text-green-400"><i
-                                            class="fas fa-seedling mr-1"></i>{{post.get_news_categories_display}}</span>
-                                    {% elif post.news_categories == "option2" %}
-                                    <span class="mr-3 flex items-center text-yellow-600 dark:text-yellow-400"><i
-                                            class="fas fa-star mr-1"></i>{{post.get_news_categories_display}}</span>
-                                    {% elif post.news_categories == "option3" %}
-                                    <span class="mr-3 flex items-center text-red-600 dark:text-red-400"><i
-                                            class="fas fa-fire mr-1"></i>{{post.get_news_categories_display}}</span>
-                                    {% elif post.news_categories == "option4" %}
-                                    <span class="mr-3 flex items-center text-purple-600 dark:text-purple-400"><i
-                                            class="fas fa-brain mr-1"></i>{{post.get_news_categories_display}}</span>
-                                    {% else %}
-                                    <span class="mr-5 flex items-center text-purple-600 dark:text-purple-400"><i
-                                            class="fas fa-brain mr-1"></i>{{post.get_news_categories_display}}</span>
+                                    {% for option, cat, txtcolor, icon in cat_datas %}
+                                    {% if post.news_categories == option %}
+                                    <span class="mr-3 flex items-center {{txtcolor}}"><i class="fas {{icon}} mr-1"></i>
+                                        {{ cat }}</span>
                                     {%endif %}
+                                    {% endfor %}
                                     <span class="flex items-center"><i
                                             class="fas fa-calendar-check mr-1"></i>{{post.news_date}}</span>
                                 </div>

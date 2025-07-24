@@ -4,14 +4,45 @@
 {% block extrahead %}
 {{ block.super }}
 <style>
+    :root {
+        /* Light mode colors */
+        --body-bg: #ffffff;
+        --hairline-color: #e0e0e0;
+        --body-quiet-color: #666;
+        --body-fg: #333;
+        --darkened-bg: #f5f5f5;
+        --primary: #447e9b;
+        --primary-hover: #30677f;
+
+        /* Text colors */
+        --text-primary: #333;
+        --text-secondary: #666;
+    }
+
+    .dark {
+        /* Dark mode colors */
+        --body-bg: #1e1e1e;
+        --hairline-color: #444;
+        --body-quiet-color: #aaa;
+        --body-fg: #e0e0e0;
+        --darkened-bg: #2d2d2d;
+        --primary: #4a8bac;
+        --primary-hover: #5fa3c5;
+
+        /* Text colors */
+        --text-primary: #f0f0f0;
+        --text-secondary: #ccc;
+    }
+
     /* Horizontal filter styling */
     .top-filters-container {
         background: var(--body-bg);
         padding: 15px;
         margin-bottom: 20px;
-        border: 1px solid var(--hairline-color);
+        border: 1px solid #2f0b92;
         border-radius: 4px;
         overflow: hidden;
+        transition: background 0.3s ease, border-color 0.3s ease;
     }
 
     .top-filters-container h2 {
@@ -20,6 +51,7 @@
         font-weight: 600;
         float: left;
         line-height: 24px;
+        color: var(--body-quiet-color);
     }
 
     .top-filters {
@@ -31,6 +63,9 @@
         margin-right: 30px;
         vertical-align: top;
         margin-bottom: 10px;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        padding: 8px 12px;
     }
 
     .filter-group h3 {
@@ -38,6 +73,7 @@
         font-size: 12px;
         font-weight: 400;
         color: var(--body-quiet-color);
+        transition: color 0.3s ease;
     }
 
     .filter-content {
@@ -63,10 +99,11 @@
         background: var(--darkened-bg);
         color: var(--body-fg);
         font-size: 12px;
+        transition: all 0.3s ease;
     }
 
     .filter-content a:hover {
-        background: var(--primary);
+        background: var(--primary-hover);
         color: white;
         text-decoration: none;
     }
@@ -88,13 +125,28 @@
         margin-left: 15px;
         font-size: 12px;
         line-height: 24px;
+        color: var(--text-secondary);
     }
 
     /* Hide the original sidebar filters */
     #changelist-filter {
         display: none;
     }
+
+    @media (prefers-color-scheme: dark) {
+        body {
+            color-scheme: dark;
+        }
+
+        body:not(.light-mode) {
+            /* Apply dark mode if not forced to light */
+            --body-bg: #1e1e1e;
+            --hairline-color: #444;
+            /* etc. */
+        }
+    }
 </style>
+
 {% endblock %}
 
 {% block content %}
